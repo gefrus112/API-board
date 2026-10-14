@@ -1,0 +1,99 @@
+/* ============================================================
+   API Board — style.css  (downloadable drop-in stylesheet)
+   Light + dark themes via prefers-color-scheme.
+   Five utility classes: .ab-card, .ab-btn, .ab-badge, .ab-code.
+   ============================================================ */
+
+:root {
+  --ab-bg: #ffffff;
+  --ab-fg: #0f172a;
+  --ab-muted: #64748b;
+  --ab-border: #e2e8f0;
+  --ab-brand: #2563eb;
+  --ab-brand-hover: #1d4ed8;
+  --ab-brand-soft: #eff6ff;
+  --ab-brand-soft-fg: #1e40af;
+  --ab-radius: 12px;
+  --ab-shadow: 0 8px 30px -8px rgba(37, 99, 235, 0.25);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ab-bg: #0b1120;
+    --ab-fg: #e5edff;
+    --ab-muted: #94a3b8;
+    --ab-border: #1e293b;
+    --ab-brand: #3b82f6;
+    --ab-brand-hover: #60a5fa;
+    --ab-brand-soft: #0f1c3a;
+    --ab-brand-soft-fg: #bfdbfe;
+  }
+}
+
+/* Optional: force a theme from the html element
+   <html data-ab-theme="dark"> */
+[data-ab-theme="light"] { color-scheme: light; }
+[data-ab-theme="dark"] {
+  --ab-bg: #0b1120;
+  --ab-fg: #e5edff;
+  --ab-muted: #94a3b8;
+  --ab-border: #1e293b;
+  --ab-brand: #3b82f6;
+  --ab-brand-hover: #60a5fa;
+  --ab-brand-soft: #0f1c3a;
+  --ab-brand-soft-fg: #bfdbfe;
+}
+
+.ab-card {
+  background: var(--ab-bg);
+  border: 1px solid var(--ab-border);
+  border-radius: var(--ab-radius);
+  padding: 24px;
+  box-shadow: var(--ab-shadow);
+}
+
+.ab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.ab-btn--primary {
+  background: var(--ab-brand);
+  color: #fff;
+}
+.ab-btn--primary:hover { background: var(--ab-brand-hover); }
+
+.ab-btn--ghost {
+  background: transparent;
+  color: var(--ab-brand-soft-fg);
+  border-color: var(--ab-border);
+}
+.ab-btn--ghost:hover { border-color: var(--ab-brand); }
+
+.ab-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: var(--ab-brand-soft);
+  color: var(--ab-brand-soft-fg);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.875em;
+}
+
+.ab-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  background: var(--ab-brand-soft);
+  color: var(--ab-brand-soft-fg);
+  border: 1px solid color-mix(in srgb, var(--ab-brand) 25%, transparent);
+}

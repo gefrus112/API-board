@@ -380,6 +380,35 @@ export const apis: ApiEntry[] = [
     tags: ["users", "mock", "test-data", "demo"],
     free: true,
   },
+  {
+    id: "email-signup",
+    name: "Email & Signup API",
+    category: "Utility",
+    description:
+      "Generate branded sign-up pages with email verification, magic-link login, and inbound email webhooks. Sends transactional email through API Board's managed relay.",
+    endpoint: "https://api.apiboard.dev/v1/email/signup",
+    method: "POST",
+    authType: "Bearer Token",
+    sampleKey: "ab_live_email_9d4a1c7b3e2f8a6c",
+    requestExample: `curl -X POST \\
+  'https://api.apiboard.dev/v1/email/signup' \\
+  -H 'Authorization: Bearer ab_live_email_9d4a1c7b3e2f8a6c' \\
+  -H 'Content-Type: application/json' \\
+  -d '{ "email": "alice@example.com", "list": "founders", "magic_link": true }'`,
+    responseExample: `{
+  "user_id": "usr_01H8M3F4K2J7E9C0Z5A1B6D8",
+  "email": "alice@example.com",
+  "verification_email_sent": true,
+  "magic_link_url": "https://auth.apiboard.dev/m/abc123",
+  "magic_link_expires_iso": "2026-10-14T14:11:00Z",
+  "list": "founders",
+  "status": "pending_verification"
+}`,
+    docsUrl: "#docs",
+    icon: "Mail",
+    tags: ["email", "signup", "auth", "magic-link", "transactional"],
+    free: true,
+  },
 ];
 
 export interface ManagedKey {
@@ -395,6 +424,9 @@ export interface ManagedKey {
   callsThisMonth: number;
   quotaPerDay: number;
   trend: number[]; // last 14 days
+  editor?: string; // Visual Studio / VS Code / Cursor / WebStorm / Other
+  purpose?: string; // free-form "what you use it for"
+  owner?: string; // GitHub login of the key creator
 }
 
 export const managedKeys: ManagedKey[] = [
@@ -411,6 +443,9 @@ export const managedKeys: ManagedKey[] = [
     callsThisMonth: 8421,
     quotaPerDay: 1000,
     trend: [180, 240, 260, 310, 290, 350, 410, 380, 420, 460, 440, 480, 510, 412],
+    editor: "Visual Studio 2022",
+    purpose: "Movie discovery SPA",
+    owner: "gefrus112",
   },
   {
     id: "mk_weather_prod",
@@ -425,6 +460,9 @@ export const managedKeys: ManagedKey[] = [
     callsThisMonth: 21400,
     quotaPerDay: 1000,
     trend: [620, 740, 810, 870, 910, 940, 980, 1010, 990, 1020, 980, 970, 960, 980],
+    editor: "VS Code",
+    purpose: "Weather widget on marketing site",
+    owner: "gefrus112",
   },
   {
     id: "mk_track_prod",
@@ -439,6 +477,9 @@ export const managedKeys: ManagedKey[] = [
     callsThisMonth: 3220,
     quotaPerDay: 1000,
     trend: [40, 80, 120, 140, 180, 160, 200, 210, 180, 190, 170, 150, 165, 156],
+    editor: "Visual Studio 2022",
+    purpose: "Logistics dashboard backend",
+    owner: "gefrus112",
   },
   {
     id: "mk_geo_staging",
@@ -453,6 +494,9 @@ export const managedKeys: ManagedKey[] = [
     callsThisMonth: 980,
     quotaPerDay: 1000,
     trend: [12, 18, 24, 30, 28, 36, 40, 38, 44, 42, 48, 46, 50, 42],
+    editor: "Cursor",
+    purpose: "Fraud detection QA sandbox",
+    owner: "guest",
   },
   {
     id: "mk_fx_prod",
@@ -467,6 +511,9 @@ export const managedKeys: ManagedKey[] = [
     callsThisMonth: 31,
     quotaPerDay: 1000,
     trend: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    editor: "VS Code",
+    purpose: "Daily cron currency snapshot",
+    owner: "gefrus112",
   },
   {
     id: "mk_jokes_sandbox",
@@ -481,6 +528,9 @@ export const managedKeys: ManagedKey[] = [
     callsThisMonth: 184,
     quotaPerDay: 1000,
     trend: [0, 0, 12, 24, 8, 16, 20, 4, 0, 0, 0, 0, 0, 0],
+    editor: "WebStorm",
+    purpose: "Chatbot demo (paused)",
+    owner: "guest",
   },
 ];
 
@@ -940,6 +990,190 @@ CMD ["node", "server.js"]`
       { type: "warn", text: "Never expose your APIBOARD_*_KEY environment variables to the browser. Use NEXT_PUBLIC_ prefix only for client-safe values; the secret keys stay on the server side via Next.js server components / route handlers." },
     ],
   },
+  {
+    id: "connect-to-visual-studio",
+    title: "Connect API Board to Visual Studio",
+    description:
+      "Install the API Board Connect extension, paste your key, and call any endpoint with IntelliSense from any .NET or Node project.",
+    category: "IDE Guides",
+    body: [
+      { type: "p", text: "The API Board Connect extension for Visual Studio 2022 wires your API Board keys directly into the IDE. Once installed, every API on the board shows up in the API Board tool window with generated C# / TypeScript client classes, IntelliSense for parameters, and a built-in playground so you can fire requests without leaving Visual Studio." },
+      { type: "h", text: "1. Install the extension" },
+      { type: "p", text: "Open Visual Studio 2022, go to Extensions → Manage Extensions, search for API Board Connect, and click Download. Restart Visual Studio to complete the install. The extension is free and works in Community, Professional, and Enterprise editions." },
+      { type: "tip", text: "If your corporate proxy blocks the marketplace, download the .vsix from the GitHub releases page and install it with `vsixinstaller.exe /i ApiBoardConnect.vsix` from a Developer Command Prompt." },
+      { type: "h", text: "2. Open the API Board tool window" },
+      { type: "p", text: "Go to View → Other Windows → API Board. The tool window docks by default on the right side of the IDE. It has three panes: APIs (the catalog), Keys (your registered keys), and Playground (request/response tester)." },
+      { type: "h", text: "3. Paste your API key" },
+      { type: "p", text: "Click the gear icon in the tool window header, select Add Key, pick an API from the dropdown, paste your ab_live_… key, give it a label (e.g. \"prod · web\"), and pick an environment. The key is stored in the Windows Credential Manager — not in plaintext on disk." },
+      {
+        type: "code",
+        lang: "powershell",
+        caption: "Alternatively, register a key from the command line",
+        code: `# From the API Board CLI
+apiboard keys register ab_live_weather_4e2f9a8c1d6b3f7e \\
+  --editor "Visual Studio 2022" \\
+  --purpose "Weather widget on marketing site" \\
+  --environment production`
+      },
+      { type: "h", text: "4. Generate a strongly-typed client" },
+      { type: "p", text: "Right-click any project in Solution Explorer → Add → API Board Client. Pick the APIs you want to call, choose C# or TypeScript, and the extension writes a Services/ApiBoard/ folder with one file per API. Each file exposes typed methods, request DTOs, and response DTOs with full XML docs." },
+      {
+        type: "code",
+        lang: "csharp",
+        caption: "Call the Weather API from C#",
+        code: `using ApiBoard.Services;
+
+var board = new ApiBoardClient(apiKey: Environment.GetEnvironmentVariable("APIBOARD_WEATHER_KEY")!);
+var forecast = await board.Weather.ForecastAsync(city: "Berlin", units: "metric");
+
+Console.WriteLine($"{forecast.Location.Name}: {forecast.Current.TempC}°C, {forecast.Current.Condition}");`
+      },
+      { type: "h", text: "5. Use the playground" },
+      { type: "p", text: "Click any API in the catalog, switch to the Playground tab, fill in the parameters, and click Send. The request runs through your registered key and the response renders as a syntax-highlighted JSON tree. Click Copy as cURL to drop the equivalent command into your terminal." },
+      { type: "warn", text: "The playground respects your per-key rate limit. If you hit the limit, the Send button greys out until the X-RateLimit-Reset timestamp passes — no 429s." },
+    ],
+  },
+  {
+    id: "style-sheets-in-vs",
+    title: "How to use API Board style sheets in Visual Studio",
+    description:
+      "Drop style.css into any project, wire it into your Razor/Blazor/ASP.NET layout, and use the .ab- utility classes.",
+    category: "IDE Guides",
+    body: [
+      { type: "p", text: "The API Board style.css sheet ships a brand-ready palette (light + dark via prefers-color-scheme), card / button / badge utility classes, and a brand glow box-shadow. It is a single file with no external dependencies, so it works in any project — including ASP.NET, Blazor, Razor Pages, MVC, and plain HTML." },
+      { type: "h", text: "1. Download style.css" },
+      { type: "p", text: "Open the Downloads tab on API Board, find style.css, and click Download. The file is ~3 KB minified and ships with both light and dark palettes baked in — no build step required." },
+      { type: "h", text: "2. Drop it into wwwroot" },
+      { type: "p", text: "In Solution Explorer, expand your ASP.NET project, open the wwwroot/css folder, and drop style.css into it. If you do not have a css folder, right-click wwwroot → Add → New Folder and name it css." },
+      { type: "tip", text: "If you prefer LibMan (the built-in client-side library manager), run `libman install style.css --provider filesystem --source \\\\server\\share\\apiboard` from the project root to wire the file in as a managed asset." },
+      { type: "h", text: "3. Reference it in _Layout.cshtml" },
+      { type: "p", text: "Open Views/Shared/_Layout.cshtml (Razor Pages / MVC) or App.razor (Blazor) and add the stylesheet link in the head section. Place it after the framework styles so the .ab- classes override defaults cleanly." },
+      {
+        type: "code",
+        lang: "html",
+        caption: "Views/Shared/_Layout.cshtml",
+        code: `<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@ViewData["Title"] — API Board</title>
+  <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+</head>`
+      },
+      { type: "h", text: "4. Use the .ab- classes" },
+      { type: "p", text: "Every style.css class is prefixed with .ab- so it never collides with Bootstrap, Tailwind, or your own classes. The five most-used classes are .ab-card, .ab-btn, .ab-btn--primary, .ab-btn--ghost, .ab-code, and .ab-badge." },
+      {
+        type: "code",
+        lang: "html",
+        caption: "Views/Home/Index.cshtml",
+        code: `<div class="ab-card">
+  <h2>Berlin weather</h2>
+  <p>14.2°C, partly cloudy.</p>
+  <a class="ab-btn ab-btn--primary" href="#">Refresh</a>
+  <span class="ab-badge">live</span>
+</div>`
+      },
+      { type: "h", text: "5. Theme toggle" },
+      { type: "p", text: "By default style.css follows the OS theme via prefers-color-scheme. To force a theme, add data-ab-theme=\"dark\" or data-ab-theme=\"light\" on the html element. The CSS uses var(--ab-bg) etc., so the swap is instant and animated." },
+      {
+        type: "code",
+        lang: "html",
+        code: `<html data-ab-theme="dark">`
+      },
+      { type: "tip", text: "Pair the data attribute with a tiny script that toggles it on click — see the Code Sheets tab for a 30-line theme toggle script you can paste into your layout." },
+    ],
+  },
+  {
+    id: "esharp-language-guide",
+    title: "The e# (esharp) programming language",
+    description:
+      "Combine video games together with a Rust-inspired syntax. Game composition, scene mixing, and API Board bindings.",
+    category: "Languages",
+    body: [
+      { type: "p", text: "e# (pronounced \"esharp\") is a domain-specific language built on top of API Board that lets you combine multiple video games into a single playable experience. The syntax is inspired by Rust — ownership, pattern matching, and zero-cost abstractions — but adds a first-class game! macro and a Scene trait that turns any API Board response into a renderable scene." },
+      { type: "p", text: "e# ships as a self-contained compiler and runtime. You write .esharp files, run esharp build, and the runtime packs everything into a single .game bundle that runs on Windows, macOS, Linux, and the browser via WebAssembly." },
+      { type: "h", text: "Why e#?" },
+      { type: "p", text: "Modern games are not built from scratch — they are compositions of pre-existing systems (physics, rendering, audio, networking, AI). e# treats composition as the language's primary feature: every game! block is a list of Scene values drawn from any source, including API Board responses." },
+      { type: "h", text: "A first program" },
+      { type: "p", text: "Every e# program has a main function that returns a Game. The game! macro builds the Game struct from a list of scenes." },
+      {
+        type: "code",
+        lang: "rust",
+        caption: "hello.esharp — combine two API Board scenes",
+        code: `use api_board::{Movie, Weather};
+
+game! Main {
+    title: "Movie night in Berlin",
+    scenes: [
+        Scene::from(Movie::search("inception")),
+        Scene::from(Weather::current("Berlin")),
+    ],
+}
+
+fn main() -> Game {
+    let mut game = Main::new();
+    game.play()
+}`
+      },
+      { type: "h", text: "Scene composition" },
+      { type: "p", text: "Scenes implement the Scene trait, which has three methods: render(), update(dt), and handle_event(event). You can compose scenes with the + operator — the runtime renders them in order and routes events to the topmost scene first." },
+      {
+        type: "code",
+        lang: "rust",
+        caption: "Compose two scenes with +",
+        code: `let scene = Scene::from(Weather::current("Berlin"))
+          + Scene::from(Movie::search("inception"));`
+      },
+      { type: "h", text: "Ownership and borrowing" },
+      { type: "p", text: "e# inherits Rust's ownership model. Scenes are owned by the Game; the runtime borrows them immutably during render and mutably during update. This makes data races impossible — a common bug in game engines — and lets the compiler statically verify that no two scenes write to the same GPU buffer at the same time." },
+      { type: "tip", text: "If you have never written Rust, start with The Rust Book chapters 1-4. e# uses the same syntax; the only addition is the game! macro and the Scene trait." },
+      { type: "h", text: "Install" },
+      { type: "p", text: "Download install-esharp.bat from the Downloads tab, right-click → Run as administrator, and the installer wires the esharp compiler into your PATH and registers the .esharp file extension with Visual Studio. Open Visual Studio, go to File → New → Project → e# Game, and you get a starter template with hello.esharp and a launchSettings.json that runs esharp run on F5." },
+      {
+        type: "code",
+        lang: "powershell",
+        caption: "Manual install (alternative)",
+        code: `# From PowerShell (admin)
+Invoke-WebRequest https://github.com/gefrus112/API-board/raw/main/public/downloads/install-esharp.bat -OutFile install-esharp.bat
+Start-Process install-esharp.bat -Verb RunAs`
+      },
+    ],
+  },
+  {
+    id: "batch-files-guide",
+    title: "Batch files & downloads",
+    description:
+      "What every .bat file in the Downloads tab does, when to run as administrator, and how to chain them.",
+    category: "Tools",
+    body: [
+      { type: "p", text: "The Downloads tab ships three Windows batch files that automate the most common API Board setup tasks: installing the API in Visual Studio, installing the e# language toolchain, and connecting style.css to any project. All three are signed and idempotent — running them twice does not break anything." },
+      { type: "h", text: "install-apiboard-vs.bat" },
+      { type: "p", text: "Right-click → Run as administrator. This script installs the API Board Connect extension into every detected Visual Studio 2022 instance, registers the apiboard CLI on your PATH, and creates a ~/.apiboard config folder with empty placeholders for your keys." },
+      { type: "warn", text: "Requires administrator elevation because it writes to C:\\Program Files\\Microsoft Visual Studio\\2022\\*\\Common7\\IDE\\Extensions\\ApiBoard\\." },
+      { type: "h", text: "install-esharp.bat" },
+      { type: "p", text: "Right-click → Run as administrator. Installs the e# compiler, the e# runtime, and the .esharp file association. Adds the esharp command to PATH so any command prompt can run esharp build / esharp run / esharp test." },
+      { type: "h", text: "connect-style-sheets.bat" },
+      { type: "p", text: "Does NOT need admin rights. Run it from any project root (HTML, ASP.NET, Blazor, plain Node — anything). It downloads style.css from the GitHub repo and drops it into ./css/style.css, ready to be linked from your layout." },
+      {
+        type: "code",
+        lang: "powershell",
+        caption: "Typical setup flow on a fresh Windows machine",
+        code: `# 1. install the API Board Connect extension into VS
+install-apiboard-vs.bat   # (run as administrator)
+
+# 2. install the e# language
+install-esharp.bat         # (run as administrator)
+
+# 3. from your project root, pull the style sheet
+connect-style-sheets.bat
+
+# 4. write your first e# program
+esharp new hello
+cd hello
+esharp run`
+      },
+      { type: "tip", text: "All three batch files print a log line per step. If something fails, copy the last 20 lines and open an issue on GitHub — the log includes your Windows version and VS edition so we can reproduce quickly." },
+    ],
+  },
 ];
 
 export interface CodeSheet {
@@ -1300,3 +1534,208 @@ if __name__ == "__main__":
     sys.exit(main())`,
   },
 ];
+
+/* ============================================================
+   Downloads — Windows batch files, esharp samples, style sheets
+   ============================================================ */
+
+export interface DownloadItem {
+  id: string;
+  filename: string;
+  /** Path under /public/downloads/... that the file is actually served from. */
+  publicPath: string;
+  size: string;
+  kind: "batch" | "esharp" | "stylesheet" | "text" | "html";
+  title: string;
+  description: string;
+  /** Does the user need to run as administrator? */
+  adminRequired: boolean;
+  /** What does the script do? */
+  steps: string[];
+  /** GitHub raw URL for the same file. */
+  rawUrl: string;
+}
+
+export const downloads: DownloadItem[] = [
+  {
+    id: "dl-install-apiboard-vs",
+    filename: "install-apiboard-vs.bat",
+    publicPath: "/downloads/install-apiboard-vs.bat",
+    size: "1.6 KB",
+    kind: "batch",
+    title: "API Board Connect installer for Visual Studio",
+    description:
+      "Installs the API Board Connect extension into every detected Visual Studio 2022 instance, wires the apiboard CLI onto your PATH, and seeds ~/.apiboard with an empty config.",
+    adminRequired: true,
+    steps: [
+      "Detects Visual Studio 2022 (Community / Pro / Enterprise) on the local machine.",
+      "Copies the API Board Connect .vsix into the per-user Extensions folder.",
+      "Runs vsixinstaller.exe to register the extension in every VS instance.",
+      "Adds C:\\Program Files\\ApiBoard\\bin to your user PATH.",
+      "Creates ~/.apiboard/config.toml with empty key = \"\" placeholders for every API.",
+    ],
+    rawUrl:
+      "https://raw.githubusercontent.com/gefrus112/API-board/main/public/downloads/install-apiboard-vs.bat",
+  },
+  {
+    id: "dl-install-esharp",
+    filename: "install-esharp.bat",
+    publicPath: "/downloads/install-esharp.bat",
+    size: "1.9 KB",
+    kind: "batch",
+    title: "e# (esharp) language installer",
+    description:
+      "Installs the e# compiler, the e# runtime, and the .esharp file association for Visual Studio. Adds esharp to your PATH so any command prompt can run esharp build / run / test.",
+    adminRequired: true,
+    steps: [
+      "Downloads the latest esharp release from the GitHub releases page.",
+      "Extracts to C:\\Program Files\\Esharp\\.",
+      "Adds the bin folder to your user PATH.",
+      "Registers .esharp and .e# file associations with Visual Studio 2022.",
+      "Installs the 'e# Game' Visual Studio project template.",
+    ],
+    rawUrl:
+      "https://raw.githubusercontent.com/gefrus112/API-board/main/public/downloads/install-esharp.bat",
+  },
+  {
+    id: "dl-connect-style-sheets",
+    filename: "connect-style-sheets.bat",
+    publicPath: "/downloads/connect-style-sheets.bat",
+    size: "1.1 KB",
+    kind: "batch",
+    title: "Connect API Board style sheets to any project",
+    description:
+      "Run from your project root (HTML, ASP.NET, Blazor, Node — anything). Downloads style.css and drops it into ./css/style.css, ready to be linked from your layout. No admin rights needed.",
+    adminRequired: false,
+    steps: [
+      "Detects whether you are in an ASP.NET project (looks for *.csproj) or a plain HTML project.",
+      "Downloads style.css from the public GitHub repo.",
+      "Creates ./css/ if it does not exist.",
+      "Writes ./css/style.css.",
+      "Prints the exact <link> tag you should paste into your layout.",
+    ],
+    rawUrl:
+      "https://raw.githubusercontent.com/gefrus112/API-board/main/public/downloads/connect-style-sheets.bat",
+  },
+  {
+    id: "dl-hello-esharp",
+    filename: "hello.esharp",
+    publicPath: "/downloads/hello.esharp",
+    size: "412 B",
+    kind: "esharp",
+    title: "Hello e# — first program",
+    description:
+      "The smallest e# program that combines two API Board scenes (Movie + Weather) into one playable Game. Run with esharp run hello.esharp.",
+    adminRequired: false,
+    steps: [
+      "Imports the Movie and Weather modules from api_board::.",
+      "Defines a game! Main block with two Scene::from(...) entries.",
+      "Calls game.play() from fn main() to launch the runtime.",
+    ],
+    rawUrl:
+      "https://raw.githubusercontent.com/gefrus112/API-board/main/public/downloads/hello.esharp",
+  },
+  {
+    id: "dl-style-css",
+    filename: "style.css",
+    publicPath: "/downloads/style.css",
+    size: "3.1 KB",
+    kind: "stylesheet",
+    title: "API Board style.css",
+    description:
+      "Drop-in CSS variables and utility classes (.ab-card, .ab-btn, .ab-badge, .ab-code) with light + dark themes baked in. No external dependencies, no build step required.",
+    adminRequired: false,
+    steps: [
+      "Light + dark palette via prefers-color-scheme.",
+      "Five utility classes: card, button (primary + ghost), code, badge.",
+      "Uses CSS variables so the theme can be force-overridden via data-ab-theme.",
+      "Minified to 3.1 KB; gzips to 1.0 KB.",
+    ],
+    rawUrl:
+      "https://raw.githubusercontent.com/gefrus112/API-board/main/public/downloads/style.css",
+  },
+  {
+    id: "dl-static-html",
+    filename: "api-board-static.html",
+    publicPath: "/downloads/api-board-static.html",
+    size: "18 KB",
+    kind: "html",
+    title: "Static HTML5 version of API Board",
+    description:
+      "A single self-contained HTML5 file with inline CSS + JS that recreates the API Board homepage. Drop it on GitHub Pages, Netlify, or any static host — no build step needed.",
+    adminRequired: false,
+    steps: [
+      "Single index.html — no server required.",
+      "All 12 APIs listed with endpoints and sample keys.",
+      "Light + dark theme toggle persisted in localStorage.",
+      "Animated blue cube icon (CSS-only).",
+      "Drag-and-drop into GitHub Pages /docs folder to publish.",
+    ],
+    rawUrl:
+      "https://raw.githubusercontent.com/gefrus112/API-board/main/public/downloads/api-board-static.html",
+  },
+];
+
+/* ============================================================
+   e# (esharp) language — feature cards
+   ============================================================ */
+
+export interface EsharpFeature {
+  icon: string;
+  title: string;
+  text: string;
+}
+
+export const esharpFeatures: EsharpFeature[] = [
+  {
+    icon: "Boxes",
+    title: "Compose games",
+    text: "Two scenes + the + operator = one composed game. Render order, event routing, and ownership all handled by the runtime.",
+  },
+  {
+    icon: "ShieldCheck",
+    title: "Rust-grade safety",
+    text: "Inherits Rust's ownership model. Data races are impossible at compile time — no two scenes write to the same GPU buffer.",
+  },
+  {
+    icon: "Zap",
+    title: "Zero-cost abstractions",
+    text: "game! is a macro that expands to plain structs — no virtual calls, no reflection, no allocations on the hot path.",
+  },
+  {
+    icon: "Globe",
+    title: "Cross-platform",
+    text: "Single .game bundle runs on Windows, macOS, Linux, and the browser via WebAssembly. Ship the same binary everywhere.",
+  },
+  {
+    icon: "Plug",
+    title: "API Board bindings",
+    text: "Every API on the board has a first-class Scene adapter. Movie::search, Weather::current, Tracking::status — all return renderable scenes.",
+  },
+  {
+    icon: "Code2",
+    title: "Visual Studio support",
+    text: "Install the VS extension and you get IntelliSense, syntax highlighting, the e# Game project template, and a built-in playground.",
+  },
+];
+
+export const esharpSampleCode = `// hello.esharp — combine two API Board scenes into one game
+use api_board::{Movie, Weather};
+
+game! MovieNight {
+    title: "Movie night in Berlin",
+    scenes: [
+        Scene::from(Movie::search("inception")),
+        Scene::from(Weather::current("Berlin"))
+            .overlay(position: TopRight, alpha: 0.8),
+    ],
+    on_exit: |state| {
+        state.save();
+    }
+}
+
+fn main() -> Game {
+    let mut game = MovieNight::new();
+    game.play()
+}`;
+

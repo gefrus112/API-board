@@ -5,6 +5,8 @@ import { Header, type TabId } from "@/components/api-board/header";
 import { Hero } from "@/components/api-board/hero";
 import { ApisSection } from "@/components/api-board/apis-section";
 import { ManagementSection } from "@/components/api-board/management-section";
+import { DownloadsSection } from "@/components/api-board/downloads-section";
+import { EsharpSection } from "@/components/api-board/esharp-section";
 import { DocsSection } from "@/components/api-board/docs-section";
 import { SheetsSection } from "@/components/api-board/sheets-section";
 import { Footer } from "@/components/api-board/footer";
@@ -21,6 +23,8 @@ export default function Page() {
           {tab === "home" && <Hero onTabChange={setTab} />}
           {tab === "apis" && <ApisSection />}
           {tab === "management" && <ManagementSection />}
+          {tab === "downloads" && <DownloadsSection />}
+          {tab === "esharp" && <EsharpSection />}
           {tab === "docs" && <DocsSection />}
           {tab === "sheets" && <SheetsSection />}
         </PageTransition>

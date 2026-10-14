@@ -22,6 +22,7 @@ import {
   Zap,
   Shield,
   Layers,
+  Mail,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -48,6 +49,7 @@ const FEATURES = [
   { icon: BookOpen, title: "Books", text: "Search 30M+ books by ISBN, title, author, or genre with covers." },
   { icon: CookingPot, title: "Recipes", text: "2M+ recipes searchable by ingredients, diet, cuisine, or meal type." },
   { icon: Users, title: "Random User", text: "Generate realistic mock profiles for testing, demos, and seed data." },
+  { icon: Mail, title: "Email & Signup", text: "Branded signup pages with email verification, magic-link, and inbound webhooks." },
 ];
 
 const PILLARS = [
@@ -74,6 +76,8 @@ export function Hero({ onTabChange }: HeroProps) {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="grid-bg absolute inset-0 -z-10" aria-hidden="true" />
+        <div className="aurora-blob b1" aria-hidden="true" />
+        <div className="aurora-blob b2" aria-hidden="true" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-background" aria-hidden="true" />
 
         {/* Floating blue cube */}
@@ -98,7 +102,7 @@ export function Hero({ onTabChange }: HeroProps) {
                 className="mb-6 gap-1.5 rounded-full border-border bg-background/60 px-3 py-1 text-xs font-medium text-muted-foreground"
               >
                 <Sparkles className="h-3.5 w-3.5 text-brand" />
-                12 free APIs · one dashboard · open source
+                13 free APIs · one dashboard · open source
               </Badge>
             </motion.div>
 
@@ -106,9 +110,11 @@ export function Hero({ onTabChange }: HeroProps) {
               initial={{ opacity: 0, scale: 0.6, rotate: -15 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="brand-glow mb-6 rounded-2xl bg-background p-2"
+              className="cube-pulse-glow brand-glow mb-6 rounded-2xl bg-background p-2"
             >
-              <CubeLogo size={72} />
+              <div className="cube-spin">
+                <CubeLogo size={72} />
+              </div>
             </motion.div>
 
             <motion.p

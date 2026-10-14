@@ -177,3 +177,152 @@
 .font-mono, code, pre {
   font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
+
+/* ============================================================
+   VFX — animated cube icon, particle hero, glitch hover
+   ============================================================ */
+
+/* Rotating 3D cube — applied to the .cube-spin class */
+@keyframes cube-spin {
+  0%   { transform: rotateY(0deg)   rotateX(-12deg); }
+  50%  { transform: rotateY(180deg) rotateX(12deg); }
+  100% { transform: rotateY(360deg) rotateX(-12deg); }
+}
+
+.cube-spin {
+  animation: cube-spin 12s linear infinite;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Floating idle wobble for the cube in the header */
+@keyframes cube-float {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%      { transform: translateY(-2px) rotate(3deg); }
+}
+.cube-float { animation: cube-float 4s ease-in-out infinite; }
+
+/* Pulsing glow for the hero logo */
+@keyframes cube-pulse-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--brand) 25%, transparent),
+      0 0 24px -4px color-mix(in oklab, var(--brand) 55%, transparent),
+      0 12px 36px -8px color-mix(in oklab, var(--brand) 50%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--brand) 40%, transparent),
+      0 0 42px -2px color-mix(in oklab, var(--brand) 70%, transparent),
+      0 18px 48px -8px color-mix(in oklab, var(--brand) 60%, transparent);
+  }
+}
+.cube-pulse-glow {
+  animation: cube-pulse-glow 3.6s ease-in-out infinite;
+}
+
+/* Aurora gradient drift on the hero background */
+@keyframes aurora-drift {
+  0%   { transform: translate3d(-6%, -4%, 0) rotate(0deg)   scale(1.0); }
+  50%  { transform: translate3d(6%, 4%, 0)   rotate(180deg) scale(1.15); }
+  100% { transform: translate3d(-6%, -4%, 0) rotate(360deg) scale(1.0); }
+}
+.aurora-blob {
+  position: absolute;
+  width: 38rem;
+  height: 38rem;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.55;
+  pointer-events: none;
+  animation: aurora-drift 18s ease-in-out infinite;
+}
+.aurora-blob.b1 {
+  top: -10rem;
+  left: -8rem;
+  background: radial-gradient(circle, color-mix(in oklab, var(--brand) 60%, transparent) 0%, transparent 70%);
+}
+.aurora-blob.b2 {
+  top: -4rem;
+  right: -10rem;
+  animation-delay: -6s;
+  background: radial-gradient(circle, color-mix(in oklab, var(--brand-soft-foreground) 60%, transparent) 0%, transparent 70%);
+}
+
+/* Glitch hover for hero headline */
+@keyframes glitch-shake {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-1px, 1px); }
+  40% { transform: translate(1px, -1px); }
+  60% { transform: translate(-1px, -1px); }
+  80% { transform: translate(1px, 1px); }
+}
+.glitch-hover:hover {
+  animation: glitch-shake 0.25s steps(2) infinite;
+}
+
+/* Shimmering gradient text */
+@keyframes text-shimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.text-shimmer {
+  background-size: 200% 100%;
+  animation: text-shimmer 5s linear infinite;
+}
+
+/* Scanline sweep — applied to download cards on hover */
+@keyframes scan-sweep {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  20%  { opacity: 0.7; }
+  80%  { opacity: 0.7; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+.scan-on-hover { position: relative; overflow: hidden; }
+.scan-on-hover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, color-mix(in oklab, var(--brand) 18%, transparent), transparent);
+  pointer-events: none;
+}
+.scan-on-hover:hover::after {
+  animation: scan-sweep 1.4s ease-in-out;
+}
+
+/* Tab switch slide-in (used by PageTransition replacement) */
+@keyframes tab-slide-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.tab-slide-in { animation: tab-slide-in 0.35s ease-out; }
+
+/* Reduced motion — respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  .cube-spin,
+  .cube-float,
+  .cube-pulse-glow,
+  .aurora-blob,
+  .text-shimmer,
+  .glitch-hover:hover {
+    animation: none !important;
+  }
+}
+
+/* Floating particle dots (CSS-only, no JS) */
+@keyframes particle-drift {
+  0%   { transform: translate(0, 0); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.6; }
+  100% { transform: translate(var(--dx), var(--dy)); opacity: 0; }
+}
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background: color-mix(in oklab, var(--brand) 70%, transparent);
+  animation: particle-drift 8s linear infinite;
+  pointer-events: none;
+}

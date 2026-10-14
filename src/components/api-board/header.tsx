@@ -6,10 +6,18 @@ import { Github, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CubeLogo } from "@/components/api-board/cube-logo";
 import { ThemeToggle } from "@/components/api-board/theme-toggle";
+import { GitHubAuthButton } from "@/components/api-board/github-auth";
 import { REPO_URL } from "@/components/api-board/data";
 import { cn } from "@/lib/utils";
 
-export type TabId = "home" | "apis" | "management" | "docs" | "sheets";
+export type TabId =
+  | "home"
+  | "apis"
+  | "management"
+  | "docs"
+  | "sheets"
+  | "downloads"
+  | "esharp";
 
 interface HeaderProps {
   active: TabId;
@@ -20,6 +28,8 @@ const NAV: { id: TabId; label: string }[] = [
   { id: "home", label: "Home" },
   { id: "apis", label: "APIs" },
   { id: "management", label: "Management" },
+  { id: "downloads", label: "Downloads" },
+  { id: "esharp", label: "e#" },
   { id: "docs", label: "Docs" },
   { id: "sheets", label: "Code Sheets" },
 ];
@@ -45,27 +55,29 @@ export function Header({ active, onTabChange }: HeaderProps) {
           className="group flex items-center gap-2.5 outline-none"
           aria-label="API Board home"
         >
-          <span className="brand-glow rounded-lg bg-background p-1 transition group-hover:scale-105">
-            <CubeLogo size={28} />
+          <span className="brand-glow cube-pulse-glow rounded-lg bg-background p-1 transition group-hover:scale-105">
+            <span className="cube-float block">
+              <CubeLogo size={28} />
+            </span>
           </span>
           <span className="flex items-baseline gap-1.5">
             <span className="text-base font-semibold tracking-tight">
               API Board
             </span>
             <span className="hidden rounded-md border border-border px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground sm:inline">
-              v1.0
+              v1.2
             </span>
           </span>
         </button>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-0.5 lg:flex">
           {NAV.map((item) => (
             <button
               key={item.id}
               onClick={() => go(item.id)}
               className={cn(
-                "rounded-md px-3 py-1.5 text-sm font-medium transition",
+                "rounded-md px-2.5 py-1.5 text-sm font-medium transition",
                 active === item.id
                   ? "bg-secondary text-foreground"
                   : "text-muted-foreground hover:bg-accent hover:text-foreground"
@@ -78,11 +90,12 @@ export function Header({ active, onTabChange }: HeaderProps) {
 
         {/* Right actions */}
         <div className="flex items-center gap-2">
+          <GitHubAuthButton />
           <Button
             asChild
             variant="outline"
             size="sm"
-            className="hidden sm:inline-flex"
+            className="hidden xl:inline-flex"
           >
             <Link
               href={REPO_URL}
@@ -96,7 +109,7 @@ export function Header({ active, onTabChange }: HeaderProps) {
           <ThemeToggle />
           <button
             type="button"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground md:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground lg:hidden"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -107,7 +120,7 @@ export function Header({ active, onTabChange }: HeaderProps) {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <nav className="border-t border-border bg-background md:hidden">
+        <nav className="border-t border-border bg-background lg:hidden">
           <div className="mx-auto max-w-7xl px-4 py-2 sm:px-6">
             {NAV.map((item) => (
               <button

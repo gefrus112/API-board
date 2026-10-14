@@ -1,0 +1,22 @@
+// hello.esharp — combine two API Board scenes into one game
+// Run with:  esharp run hello.esharp
+// Docs:     https://github.com/gefrus112/API-board
+
+use api_board::{Movie, Weather};
+
+game! MovieNight {
+    title: "Movie night in Berlin",
+    scenes: [
+        Scene::from(Movie::search("inception")),
+        Scene::from(Weather::current("Berlin"))
+            .overlay(position: TopRight, alpha: 0.8),
+    ],
+    on_exit: |state| {
+        state.save();
+    },
+}
+
+fn main() -> Game {
+    let mut game = MovieNight::new();
+    game.play()
+}

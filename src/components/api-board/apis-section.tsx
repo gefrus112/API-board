@@ -15,6 +15,7 @@ import {
   BookOpen,
   CookingPot,
   Users,
+  Mail,
   Check,
   Copy,
   ExternalLink,
@@ -45,6 +46,7 @@ const ICONS: Record<string, LucideIcon> = {
   BookOpen,
   CookingPot,
   Users,
+  Mail,
 };
 
 const CATEGORIES = [

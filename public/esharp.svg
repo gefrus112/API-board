@@ -1,0 +1,37 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <linearGradient id="esharpBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="esharpGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7dd3fc"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <filter id="eGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Hexagonal background -->
+  <path d="M32 4 L56 18 L56 46 L32 60 L8 46 L8 18 Z" fill="url(#esharpBg)"/>
+  <!-- Inner hexagon outline -->
+  <path d="M32 10 L50 21 L50 43 L32 54 L14 43 L14 21 Z" fill="none" stroke="url(#esharpGlow)" stroke-width="1.5" opacity="0.7"/>
+  <!-- E# symbol -->
+  <g filter="url(#eGlow)" fill="#ffffff">
+    <!-- E shape -->
+    <rect x="18" y="22" width="14" height="3" rx="1"/>
+    <rect x="18" y="22" width="3" height="20" rx="1"/>
+    <rect x="18" y="31.5" width="11" height="3" rx="1"/>
+    <rect x="18" y="39" width="14" height="3" rx="1"/>
+    <!-- # (music sharp / programming hash) — two verticals + two horizontals -->
+    <rect x="36" y="24" width="3" height="18" rx="1" transform="rotate(8 37.5 33)"/>
+    <rect x="44" y="22" width="3" height="18" rx="1" transform="rotate(8 45.5 31)"/>
+    <rect x="34" y="29" width="16" height="3" rx="1" transform="rotate(8 42 30.5)"/>
+    <rect x="34" y="35" width="16" height="3" rx="1" transform="rotate(8 42 36.5)"/>
+  </g>
+</svg>

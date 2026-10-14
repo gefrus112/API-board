@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-ab-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Board — Free API Keys, Docs & Code Sheets</title>
+  <meta name="description" content="12 free APIs behind one dashboard: movie search, weather, tracking, geolocation, currency, jokes, news, QR, sports, books, recipes, random user. Plus the e# language for combining games." />
+  <link rel="icon" type="image/svg+xml" href="./cube.svg" />
+  <style>
+    /* ============================================================
+       API Board — static HTML5 version
+       Inline CSS so the file is fully self-contained.
+       ============================================================ */
+    :root {
+      --bg: #ffffff;
+      --fg: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --brand: #2563eb;
+      --brand-hover: #1d4ed8;
+      --brand-soft: #eff6ff;
+      --brand-soft-fg: #1e40af;
+      --radius: 12px;
+      --shadow: 0 8px 30px -8px rgba(37, 99, 235, 0.25);
+    }
+    [data-ab-theme="dark"] {
+      --bg: #0b1120;
+      --fg: #e5edff;
+      --muted: #94a3b8;
+      --border: #1e293b;
+      --brand: #3b82f6;
+      --brand-hover: #60a5fa;
+      --brand-soft: #0f1c3a;
+      --brand-soft-fg: #bfdbfe;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    header, main, footer { padding: 24px 0; }
+    header { border-bottom: 1px solid var(--border); position: sticky; top: 0; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); z-index: 10; }
+    .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px; }
+    .logo img { width: 28px; height: 28px; animation: cube-spin 12s linear infinite; transform-origin: center; }
+    @keyframes cube-spin {
+      0%   { transform: rotateY(0)   rotateX(-12deg); }
+      50%  { transform: rotateY(180deg) rotateX(12deg); }
+      100% { transform: rotateY(360deg) rotateX(-12deg); }
+    }
+    nav ul { list-style: none; display: flex; gap: 4px; }
+    nav a { color: var(--muted); padding: 6px 10px; border-radius: 6px; font-size: 14px; font-weight: 500; }
+    nav a:hover, nav a.active { background: var(--brand-soft); color: var(--brand-soft-fg); text-decoration: none; }
+    .actions { display: flex; gap: 8px; align-items: center; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; font-weight: 600; font-size: 14px; border: 1px solid var(--border); background: var(--bg); color: var(--fg); cursor: pointer; }
+    .btn:hover { border-color: var(--brand); }
+    .btn-primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+    .btn-primary:hover { background: var(--brand-hover); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 80px 0 40px; }
+    .hero .badge { display: inline-block; padding: 4px 12px; border: 1px solid var(--border); border-radius: 999px; font-size: 12px; color: var(--muted); margin-bottom: 16px; background: var(--bg); }
+    .hero .badge strong { color: var(--brand); }
+    .hero .cube-hero { width: 72px; height: 72px; margin: 0 auto 24px; animation: cube-spin 12s linear infinite, cube-pulse 3.6s ease-in-out infinite; }
+    @keyframes cube-pulse {
+      0%, 100% { filter: drop-shadow(0 0 12px color-mix(in srgb, var(--brand) 30%, transparent)); }
+      50% { filter: drop-shadow(0 0 28px color-mix(in srgb, var(--brand) 60%, transparent)); }
+    }
+    .hero h1 { font-size: 48px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px; }
+    .hero h1 span { background: linear-gradient(90deg, var(--brand), var(--brand-soft-fg)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+    .hero p { font-size: 18px; color: var(--muted); max-width: 640px; margin: 0 auto 32px; }
+    .hero .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hero .eyebrow { color: var(--brand); font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; font-size: 13px; margin-bottom: 8px; }
+
+    /* Stats */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 720px; margin: 48px auto 0; }
+    .stat { border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; background: var(--bg); }
+    .stat dt { font-size: 11px; color: var(--muted); }
+    .stat dd { font-size: 18px; font-weight: 600; margin-top: 2px; }
+
+    /* Pillars */
+    .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 64px 0; }
+    .pillar { border: 1px solid var(--border); border-radius: 12px; padding: 24px; background: var(--bg); box-shadow: var(--shadow); }
+    .pillar h3 { font-size: 18px; margin-bottom: 8px; }
+    .pillar p { color: var(--muted); font-size: 14px; }
+
+    /* APIs grid */
+    section h2 { font-size: 28px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; }
+    section .lead { color: var(--muted); margin-bottom: 32px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+    .card { border: 1px solid var(--border); border-radius: 12px; padding: 20px; background: var(--bg); transition: transform 120ms ease, border-color 120ms ease; cursor: pointer; }
+    .card:hover { transform: translateY(-4px); border-color: var(--brand); }
+    .card .icon { width: 40px; height: 40px; border-radius: 8px; background: var(--brand-soft); color: var(--brand); display: inline-flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 12px; }
+    .card h3 { font-size: 16px; margin-bottom: 6px; }
+    .card p { font-size: 13px; color: var(--muted); }
+    .card .free { display: inline-block; padding: 2px 6px; font-size: 10px; font-weight: 600; background: var(--brand-soft); color: var(--brand); border-radius: 4px; margin-left: 6px; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); margin-top: 80px; color: var(--muted); font-size: 13px; }
+    footer .container { display: flex; justify-content: space-between; align-items: center; padding: 24px; flex-wrap: wrap; gap: 12px; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 32px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .pillars { grid-template-columns: 1fr; }
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-row">
+      <a class="logo" href="#">
+        <img src="./cube.svg" alt="API Board" />
+        API Board <span style="font-size:10px;color:var(--muted);border:1px solid var(--border);padding:2px 6px;border-radius:4px;">v1.2</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#apis">APIs</a></li>
+          <li><a href="#management">Management</a></li>
+          <li><a href="#downloads">Downloads</a></li>
+          <li><a href="#esharp">e#</a></li>
+          <li><a href="#docs">Docs</a></li>
+        </ul>
+      </nav>
+      <div class="actions">
+        <a class="btn" href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">GitHub</a>
+        <button class="btn" id="theme-toggle" type="button">Toggle theme</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="badge">★ 12 free APIs · one dashboard · open source</div>
+        <img class="cube-hero" src="./cube.svg" alt="API Board cube" />
+        <p class="eyebrow">Welcome to API Board</p>
+        <h1>One board for every <span>API key</span> you need</h1>
+        <p>API Board bundles 12 free APIs behind a single dashboard — movie search, weather, tracking, geolocation, currency, jokes, news, QR, sports scores, books, recipes, and random user — plus the e# language for combining video games together.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#apis">Browse APIs</a>
+          <a class="btn" href="#downloads">Downloads</a>
+          <a class="btn" href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">Star on GitHub</a>
+        </div>
+        <dl class="stats">
+          <div class="stat"><dt>Live APIs</dt><dd>12</dd></div>
+          <div class="stat"><dt>Free quota</dt><dd>1,000 / day</dd></div>
+          <div class="stat"><dt>Carriers tracked</dt><dd>200+</dd></div>
+          <div class="stat"><dt>FX currencies</dt><dd>170+</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="pillars">
+        <div class="pillar"><h3>⚡ Fast</h3><p>Edge-cached responses, sub-50ms TTFB on hot routes, automatic retry on 5xx errors.</p></div>
+        <div class="pillar"><h3>🛡 Secure</h3><p>Keys prefixed ab_live_ for prod and ab_test_ for sandbox. Rotate with 7-day grace period.</p></div>
+        <div class="pillar"><h3>🧩 Composable</h3><p>Every API ships with a TypeScript SDK, a cURL example, and a drop-in code sheet.</p></div>
+      </div>
+    </section>
+
+    <section class="container" id="apis">
+      <h2>What's on the board</h2>
+      <p class="lead">Each API ships with its own key, its own rate limit, and its own docs page. Use one or use them all.</p>
+      <div class="grid" id="api-grid"></div>
+    </section>
+
+    <section class="container" id="esharp">
+      <h2>Meet e# (esharp)</h2>
+      <p class="lead">A Rust-inspired programming language for combining video games together.</p>
+      <pre style="background:var(--brand-soft);color:var(--brand-soft-fg);padding:16px;border-radius:8px;overflow:auto;font-size:13px;line-height:1.5;">use api_board::{Movie, Weather};
+
+game! MovieNight {
+    title: "Movie night in Berlin",
+    scenes: [
+        Scene::from(Movie::search("inception")),
+        Scene::from(Weather::current("Berlin")),
+    ],
+}
+
+fn main() -&gt; Game {
+    let mut game = MovieNight::new();
+    game.play()
+}</pre>
+      <p style="margin-top:16px;"><a class="btn btn-primary" href="https://github.com/gefrus112/API-board/raw/main/public/downloads/install-esharp.bat">Download install-esharp.bat</a></p>
+    </section>
+
+    <section class="container" id="downloads">
+      <h2>Downloads</h2>
+      <p class="lead">Windows batch files, esharp samples, and the static HTML5 version of this page.</p>
+      <div class="grid" id="download-grid"></div>
+    </section>
+
+    <section class="container" id="docs">
+      <h2>Docs</h2>
+      <p class="lead">Full docs live in the Next.js app and in the GitHub repo README.</p>
+      <ul>
+        <li><a href="https://github.com/gefrus112/API-board#readme" target="_blank" rel="noreferrer">README on GitHub</a></li>
+        <li><a href="https://github.com/gefrus112/API-board/blob/main/LICENSE" target="_blank" rel="noreferrer">License (restricted access)</a></li>
+        <li>IDE Guides: How to use API Board in Visual Studio, in VS Code, and how to push to GitHub from VS.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>© 2026 API Board. All rights reserved.</span>
+      <a href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">gefrus112/API-board</a>
+    </div>
+  </footer>
+
+  <script>
+    /* Theme toggle */
+    (function () {
+      var html = document.documentElement;
+      var saved = localStorage.getItem("ab-theme");
+      if (saved) html.setAttribute("data-ab-theme", saved);
+      var btn = document.getElementById("theme-toggle");
+      btn.addEventListener("click", function () {
+        var next = html.getAttribute("data-ab-theme") === "dark" ? "light" : "dark";
+        html.setAttribute("data-ab-theme", next);
+        localStorage.setItem("ab-theme", next);
+      });
+    })();
+
+    /* APIs list */
+    (function () {
+      var apis = [
+        { icon: "🎬", name: "Movie Search", desc: "Posters, plot, cast, ratings, and streaming availability.", tags: ["movies"] },
+        { icon: "☁️", name: "Weather Forecast", desc: "Current conditions, 7-day forecast, 30 years of history.", tags: ["weather"] },
+        { icon: "📦", name: "Rapid Tracking", desc: "200+ carriers auto-detected. Webhook alerts.", tags: ["tracking"] },
+        { icon: "🌐", name: "IP Geolocation", desc: "Country, city, ISP, ASN, and proxy/VPN detection.", tags: ["geo"] },
+        { icon: "💰", name: "Currency Exchange", desc: "Live FX rates for 170+ currencies.", tags: ["fx"] },
+        { icon: "😂", name: "Jokes", desc: "Programming, dad, and knock-knock jokes in 6 languages.", tags: ["fun"] },
+        { icon: "📰", name: "News Headlines", desc: "Top stories from 80,000+ sources in 50+ countries.", tags: ["news"] },
+        { icon: "📱", name: "QR Generator", desc: "Generate QR codes for URLs, vCards, Wi-Fi, crypto.", tags: ["qr"] },
+        { icon: "🏆", name: "Sports Scores", desc: "Live scores, schedules, and standings for 30+ leagues.", tags: ["sports"] },
+        { icon: "📚", name: "Books", desc: "30M+ books searchable by ISBN, title, author, genre.", tags: ["books"] },
+        { icon: "🍳", name: "Recipes", desc: "2M+ recipes by ingredients, diet, cuisine, or meal type.", tags: ["recipes"] },
+        { icon: "👤", name: "Random User", desc: "Mock profiles for testing, demos, and seed data.", tags: ["users"] }
+      ];
+      var grid = document.getElementById("api-grid");
+      apis.forEach(function (a) {
+        var c = document.createElement("div");
+        c.className = "card";
+        c.innerHTML =
+          '<div class="icon">' + a.icon + '</div>' +
+          '<h3>' + a.name + ' <span class="free">FREE</span></h3>' +
+          '<p>' + a.desc + '</p>';
+        grid.appendChild(c);
+      });
+    })();
+
+    /* Downloads list */
+    (function () {
+      var items = [
+        { icon: "🛠", name: "install-apiboard-vs.bat", desc: "Install the API Board Connect extension into VS 2022.", url: "https://github.com/gefrus112/API-board/raw/main/public/downloads/install-apiboard-vs.bat" },
+        { icon: "🎮", name: "install-esharp.bat", desc: "Install the e# language toolchain and VS project template.", url: "https://github.com/gefrus112/API-board/raw/main/public/downloads/install-esharp.bat" },
+        { icon: "🎨", name: "connect-style-sheets.bat", desc: "Drop style.css into any project root.", url: "https://github.com/gefrus112/API-board/raw/main/public/downloads/connect-style-sheets.bat" },
+        { icon: "📜", name: "hello.esharp", desc: "First e# program — combine Movie + Weather scenes.", url: "https://github.com/gefrus112/API-board/raw/main/public/downloads/hello.esharp" },
+        { icon: "💅", name: "style.css", desc: "Drop-in stylesheet with .ab-card, .ab-btn, .ab-badge classes.", url: "https://github.com/gefrus112/API-board/raw/main/public/downloads/style.css" }
+      ];
+      var grid = document.getElementById("download-grid");
+      items.forEach(function (d) {
+        var c = document.createElement("a");
+        c.className = "card";
+        c.href = d.url;
+        c.target = "_blank";
+        c.rel = "noreferrer";
+        c.style.textDecoration = "none";
+        c.innerHTML =
+          '<div class="icon">' + d.icon + '</div>' +
+          '<h3>' + d.name + '</h3>' +
+          '<p>' + d.desc + '</p>';
+        grid.appendChild(c);
+      });
+    })();
+  </script>
+</body>
+</html>

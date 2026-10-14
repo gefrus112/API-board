@@ -1,21 +1,105 @@
-MIT License
+API BOARD — RESTRICTED ACCESS LICENSE
+Version 1.2 — 14 October 2026
 
-Copyright (c) 2026 gefrus112
+Copyright (c) 2026 gefrus112. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+---------------------------------------------------------------------
+1. SUMMARY
+---------------------------------------------------------------------
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This software, source code, documentation, batch files, code sheets,
+design assets, and the "e#" (esharp) programming language spec —
+collectively, the "Software" — are the proprietary intellectual property
+of the copyright holder.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+You MAY read, run, and deploy the Software for personal, non-commercial
+evaluation purposes, subject to the conditions in Section 2 below.
+
+You MAY NOT copy, redistribute, relicense, sublicense, sell, host, or
+build derivative works from the Software without prior written
+authorization from the copyright holder. See Section 3.
+
+To request access, fork-and-extend rights, or a commercial license,
+contact the maintainer at https://github.com/gefrus112/API-board or
+open an issue on the repository.
+
+---------------------------------------------------------------------
+2. PERMITTED USES  (no permission required)
+---------------------------------------------------------------------
+
+(a) Reading the source code for learning purposes.
+(b) Cloning the repository to your local machine for personal study.
+(c) Running the Next.js application on localhost for evaluation.
+(d) Signing in to the hosted instance at https://api.apiboard.dev using
+    your own GitHub account, where you may use API keys issued to you
+    under the per-key terms shown in the Management tab.
+(e) Downloading and running the provided batch files
+    (install-apiboard-vs.bat, install-esharp.bat, connect-style-sheets.bat)
+    on your own Windows machine for personal use.
+
+---------------------------------------------------------------------
+3. PROHIBITED USES  (require written permission)
+---------------------------------------------------------------------
+
+(a) Copying more than 50 lines of the source code into any other
+    project, public or private.
+(b) Forking, mirroring, or re-publishing the repository on any source
+    hosting service (GitHub, GitLab, Bitbucket, Gitee, Codeberg, or
+    otherwise) without a "Fork-and-Extend" license grant from the
+    copyright holder.
+(c) Removing, altering, or obscuring the copyright notice, license
+    file, or the "API Board" / "e#" / "esharp" branding.
+(d) Selling, leasing, renting, or sublicensing the Software or any
+    derived product.
+(e) Using the API Board name, logo (blue cube), or e# name to endorse
+    or promote products without written authorization.
+(f) Reverse-engineering, decompiling, or attempting to derive the
+    source of any closed-source component shipped with the Software.
+(g) Training, fine-tuning, or evaluating machine-learning models on
+    the source code or documentation of this Software, with the intent
+    of producing a competing product, without written authorization.
+
+---------------------------------------------------------------------
+4. API KEYS
+---------------------------------------------------------------------
+
+API keys issued via the Management tab remain the property of the
+copyright holder. Keys are granted to individual GitHub accounts under
+a non-transferable, non-exclusive, revocable license for the purpose
+stated in the per-key "purpose" field. The copyright holder may revoke
+any key at any time and without notice.
+
+---------------------------------------------------------------------
+5. THE e# (ESHARP) PROGRAMMING LANGUAGE
+---------------------------------------------------------------------
+
+The e# language specification, the e# compiler, the e# runtime, the
+e# Visual Studio project template, the e# icon (hexagonal "E#"), and
+all related trademarks are the exclusive property of the copyright
+holder. You may not implement a competing programming language using
+the e# name, icon, or trademark.
+
+---------------------------------------------------------------------
+6. DISCLAIMER
+---------------------------------------------------------------------
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---------------------------------------------------------------------
+7. CONTACT
+---------------------------------------------------------------------
+
+To request a commercial license, fork-and-extend grant, or written
+permission under Section 3:
+
+  Repository:  https://github.com/gefrus112/API-board
+  Issues:      https://github.com/gefrus112/API-board/issues
+
+Include your GitHub username, intended use, and (if applicable) the
+URL of the competing or derivative product you intend to build.
