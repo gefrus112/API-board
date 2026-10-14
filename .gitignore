@@ -1,0 +1,70 @@
+# API Board — Next.js 16 + TypeScript
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+/bun.lock
+/.bun
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+Thumbs.db
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dev.log
+server.log
+
+# local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# prisma
+/prisma/migrations/dev.db*
+/prisma/dev.db*
+
+# z-scripts (sandbox)
+/.zscripts/
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+!.vscode/tasks.json
+.idea/
+
+# agent context
+/agent-ctx/
+
+# sandbox-only artifacts (not part of the public repo)
+/skills/
+/upload/
+/db/
+/examples/
+/mini-services/
+/worklog.md
+/Caddyfile
