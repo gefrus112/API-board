@@ -3,49 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Board — Free API Keys, Docs & Code Sheets</title>
-  <meta name="description" content="13 free APIs behind one dashboard: movie search, weather, tracking, geolocation, currency, jokes, news, QR, sports, books, recipes, random user, email signup. Plus the e# language for combining Steam games together." />
+  <title>API Board — Free API Keys, Docs, e# Language, Cloud Console</title>
+  <meta name="description" content="13 free APIs, the e# language for combining Steam games, a Cloud Console for management, and copy-paste code sheets. Open source on GitHub." />
   <link rel="icon" type="image/svg+xml" href="./cube.svg" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+  <!-- Inline SVG sprite (shared across all pages) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <defs>
+      <linearGradient id="cubeFront" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#1d4ed8"/></linearGradient>
+      <linearGradient id="cubeTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient>
+      <linearGradient id="cubeSide" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#1e3a8a"/></linearGradient>
+    </defs>
+    <symbol id="i-cube" viewBox="0 0 64 64">
+      <path d="M32 4 L58 18 L32 32 L6 18 Z" fill="url(#cubeTop)"/>
+      <path d="M6 18 L32 32 L32 60 L6 46 Z" fill="url(#cubeSide)"/>
+      <path d="M58 18 L32 32 L32 60 L58 46 Z" fill="url(#cubeFront)"/>
+      <circle cx="40" cy="36" r="2.4" fill="#fff"/>
+      <circle cx="50" cy="36" r="2.4" fill="#fff"/>
+      <path d="M38 44 Q45 50 52 44" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+    </symbol>
+    <symbol id="i-esharp" viewBox="0 0 64 64">
+      <defs><linearGradient id="eBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#6366f1"/></linearGradient></defs>
+      <path d="M32 4 L56 18 L56 46 L32 60 L8 46 L8 18 Z" fill="url(#eBg)"/>
+      <path d="M32 10 L50 21 L50 43 L32 54 L14 43 L14 21 Z" fill="none" stroke="#7dd3fc" stroke-width="1.5" opacity="0.7"/>
+      <g fill="#fff"><rect x="18" y="22" width="14" height="3" rx="1"/><rect x="18" y="22" width="3" height="20" rx="1"/><rect x="18" y="31.5" width="11" height="3" rx="1"/><rect x="18" y="39" width="14" height="3" rx="1"/><rect x="36" y="24" width="3" height="18" rx="1" transform="rotate(8 37.5 33)"/><rect x="44" y="22" width="3" height="18" rx="1" transform="rotate(8 45.5 31)"/><rect x="34" y="29" width="16" height="3" rx="1" transform="rotate(8 42 30.5)"/><rect x="34" y="35" width="16" height="3" rx="1" transform="rotate(8 42 36.5)"/></g>
+    </symbol>
+    <symbol id="i-movie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M7 3v18M17 3v18M2 9h5M2 15h5M17 9h5M17 15h5M7 12h10"/></symbol>
+    <symbol id="i-weather" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></symbol>
+    <symbol id="i-track" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 8l6 3v2l-6 3V8z"/></symbol>
+    <symbol id="i-geo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></symbol>
+    <symbol id="i-fx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9M9.69 8h11.48M7.38 14L13.12 5M9.69 16L4 7M14.31 16H2.83M16.62 14l-5.74 9"/></symbol>
+    <symbol id="i-jokes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></symbol>
+    <symbol id="i-news" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1 .5-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6z"/></symbol>
+    <symbol id="i-qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M21 14v7h-7M14 21h3"/></symbol>
+    <symbol id="i-sports" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2M6 3h12v6a6 6 0 0 1-12 0V3zM12 15v6M8 21h8"/></symbol>
+    <symbol id="i-books" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-recipes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54l3-3a3.5 3.5 0 0 1 4.95 4.95l-3 3a5.11 5.11 0 0 1-1.54 1.05A4 4 0 0 1 13.87 6M7.41 6l4.59 4.59M16 17l-4.59-4.59M6 21l6-6 4 4 6-6"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 .5-9 6 6 0 0 0-11-1 4.5 4.5 0 0 0-1 9h11z"/></symbol>
+    <symbol id="i-gamepad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><rect x="2" y="6" width="20" height="12" rx="4"/></symbol>
+    <symbol id="i-comments" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-docs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A12 12 0 0 0 0 12a12 12 0 0 0 8.21 11.39c.6.11.82-.26.82-.58v-2.17c-3.34.72-4.04-1.42-4.04-1.42-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0 1 12 6.8c1.02 0 2.05.14 3 .41 2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12 12 12 0 0 0 12 .5z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.27 6.72-1.55 9.05A12.88 12.88 0 0 1 17 15a22 22 0 0 1-3 .76"/><path d="M9 12H4s.55-3.78 1.5-5.5C7 4.5 9 4 9 4m3 8v5s3.78-.55 5.5-1.5C19.5 14 20 12 20 12"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+  </svg>
+
   <header>
     <div class="container nav-row">
-      <a class="logo" href="#">
-        <img src="./cube.svg" alt="API Board" />
-        <span>API Board <span class="ver">v1.3</span></span>
+      <a class="logo" href="./index.html">
+        <svg class="cube-logo"><use href="#i-cube"/></svg>
+        <span>API Board <span class="ver">v1.4</span></span>
       </a>
       <nav>
         <ul>
-          <li><a href="#apis">APIs</a></li>
-          <li><a href="#management">Management</a></li>
-          <li><a href="#esharp">e#</a></li>
-          <li><a href="#editor">Editor</a></li>
-          <li><a href="#comments">Comments</a></li>
-          <li><a href="#downloads">Downloads</a></li>
+          <li><a href="./index.html" class="active">Home</a></li>
+          <li><a href="./esharp.html">e#</a></li>
+          <li><a href="./cloud-console.html">Cloud Console</a></li>
+          <li><a href="./games.html">Game Launcher</a></li>
+          <li><a href="./comments.html">Comments</a></li>
+          <li><a href="./docs.html">Docs</a></li>
         </ul>
       </nav>
       <div class="actions">
-        <a class="btn btn-ghost" href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">GitHub</a>
-        <button class="btn" id="theme-toggle" type="button">Theme</button>
+        <a class="btn btn-ghost" href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">
+          <svg class="icon"><use href="#i-github"/></svg> GitHub
+        </a>
+        <button class="btn" id="theme-toggle" type="button" aria-label="Toggle theme">
+          <svg class="icon icon-sun"><use href="#i-sun"/></svg>
+          <svg class="icon icon-moon"><use href="#i-moon"/></svg>
+          <span class="sr-only">Toggle theme</span>
+        </button>
       </div>
     </div>
   </header>
 
   <main>
+    <!-- Hero -->
     <section class="hero">
+      <div class="aurora aurora-1"></div>
+      <div class="aurora aurora-2"></div>
       <div class="container">
-        <div class="badge">★ 13 free APIs · one dashboard · open source</div>
-        <img class="cube-hero" src="./cube.svg" alt="API Board cube" />
-        <p class="eyebrow">Welcome to API Board</p>
-        <h1>One board for every <span>API key</span> you need</h1>
-        <p>API Board bundles 13 free APIs behind a single dashboard — movie search, weather, tracking, geolocation, currency, jokes, news, QR, sports scores, books, recipes, random user, and email signup — plus the e# language for combining Steam games together.</p>
-        <div class="cta">
-          <a class="btn btn-primary" href="#apis">Browse APIs</a>
-          <a class="btn" href="#esharp">Meet e#</a>
-          <a class="btn" href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">Star on GitHub</a>
+        <div class="badge reveal"><span class="dot-pulse"></span> 13 free APIs · e# language · Cloud Console · open source</div>
+        <svg class="cube-hero reveal" data-delay="100"><use href="#i-cube"/></svg>
+        <p class="eyebrow reveal" data-delay="200">Welcome to API Board</p>
+        <h1 class="reveal glitch-hover" data-delay="300">One board for every <span class="shimmer">API key</span> you need</h1>
+        <p class="reveal" data-delay="400">API Board bundles 13 free APIs behind a single dashboard, ships the <strong>e#</strong> programming language for combining your Steam games together, and a <strong>Cloud Console</strong> for managing keys, usage, and live traffic — with copy-paste code sheets and Vercel-style docs.</p>
+        <div class="cta reveal" data-delay="500">
+          <a class="btn btn-primary" href="#apis"><svg class="icon"><use href="#i-arrow"/></svg> Browse APIs</a>
+          <a class="btn" href="./esharp.html"><svg class="icon"><use href="#i-esharp"/></svg> Meet e#</a>
+          <a class="btn" href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-github"/></svg> Star on GitHub</a>
         </div>
-        <dl class="stats">
+        <dl class="stats reveal" data-delay="600">
           <div class="stat"><dt>Live APIs</dt><dd>13</dd></div>
           <div class="stat"><dt>Free quota</dt><dd>1,000 / day</dd></div>
           <div class="stat"><dt>Carriers tracked</dt><dd>200+</dd></div>
@@ -54,104 +114,115 @@
       </div>
     </section>
 
+    <!-- Pillars -->
     <section class="container">
       <div class="pillars">
-        <div class="pillar"><h3>⚡ Fast</h3><p>Edge-cached responses, sub-50ms TTFB on hot routes, automatic retry on 5xx errors.</p></div>
-        <div class="pillar"><h3>🛡 Secure</h3><p>Keys prefixed ab_live_ for prod and ab_test_ for sandbox. Rotate with 7-day grace period.</p></div>
-        <div class="pillar"><h3>🧩 Composable</h3><p>Every API ships with a TypeScript SDK, a cURL example, and a drop-in code sheet.</p></div>
+        <div class="pillar reveal" data-delay="0"><svg class="icon pillar-icon"><use href="#i-zap"/></svg><h3>Fast</h3><p>Edge-cached responses, sub-50ms TTFB on hot routes, automatic retry on 5xx errors.</p></div>
+        <div class="pillar reveal" data-delay="100"><svg class="icon pillar-icon"><use href="#i-shield"/></svg><h3>Secure</h3><p>Keys prefixed ab_live_ for prod and ab_test_ for sandbox. Rotate with 7-day grace period.</p></div>
+        <div class="pillar reveal" data-delay="200"><svg class="icon pillar-icon"><use href="#i-layers"/></svg><h3>Composable</h3><p>Every API ships with a TypeScript SDK, a cURL example, and a drop-in code sheet.</p></div>
       </div>
     </section>
 
+    <!-- APIs -->
     <section class="container" id="apis">
-      <h2>What's on the board</h2>
-      <p class="lead">Each API ships with its own key, its own rate limit, and its own docs page. Use one or use them all.</p>
+      <h2 class="reveal">What's on the board</h2>
+      <p class="lead reveal" data-delay="100">Each API ships with its own key, its own rate limit, and its own docs page. Use one or use them all.</p>
       <div class="grid" id="api-grid"></div>
     </section>
 
-    <section class="container" id="esharp">
-      <h2>Meet e# (esharp)</h2>
-      <p class="lead">A Rust-inspired programming language for combining Steam games together into a single playable experience.</p>
-      <div class="esharp-hero">
-        <img src="./esharp.svg" alt="e# mascot" />
-        <div>
-          <pre><code>use api_board::{Movie, Weather, Steam};
+    <!-- e# teaser -->
+    <section class="container" id="esharp-teaser">
+      <h2 class="reveal">Meet e# (esharp)</h2>
+      <p class="lead reveal" data-delay="100">A Rust-inspired programming language that combines your Steam games together into one playable experience.</p>
+      <div class="esharp-hero reveal" data-delay="200">
+        <svg class="esharp-mascot"><use href="#i-esharp"/></svg>
+        <pre><code><span class="kw">use</span> api_board::{Steam, Weather};
 
-game! SteamMashup {
-    title: "Cinematic weather in Berlin",
+<span class="macro">game!</span> <span class="type">SteamMashup</span> {
+    title: <span class="str">"Open-world crossover"</span>,
     scenes: [
-        Scene::from(Movie::search("inception")),
-        Scene::from(Weather::current("Berlin")),
-        Scene::from(Steam::library().pick("Portal 2")),
+        <span class="type">Scene::from</span>(<span class="type">Steam::library</span>().pick(<span class="str">"Portal 2"</span>)),
+        <span class="type">Scene::from</span>(<span class="type">Steam::library</span>().pick(<span class="str">"Stardew Valley"</span>)),
     ],
 }
 
-fn main() -&gt; Game {
-    let mut game = SteamMashup::new();
+<span class="kw">fn</span> <span class="fn-name">main</span>() -&gt; <span class="type">Game</span> {
+    <span class="kw">let mut</span> game = <span class="type">SteamMashup::new</span>();
     game.play()
 }</code></pre>
-        </div>
       </div>
-      <p style="margin-top:24px;">
-        <a class="btn btn-primary" href="https://github.com/gefrus112/API-board/raw/main/public/downloads/install-esharp.bat">Download install-esharp.bat</a>
-        <a class="btn" href="https://github.com/gefrus112/API-board/raw/main/public/downloads/hello.esharp">Download hello.esharp</a>
+      <p class="reveal" data-delay="300">
+        <a class="btn btn-primary" href="./esharp.html">Learn e# <svg class="icon"><use href="#i-arrow"/></svg></a>
+        <a class="btn" href="https://github.com/gefrus112/API-board/raw/main/public/downloads/install-esharp.bat"><svg class="icon"><use href="#i-download"/></svg> install-esharp.bat</a>
       </p>
     </section>
 
-    <section class="container" id="editor">
-      <h2>Try the e# editor</h2>
-      <p class="lead">Write e# code right in your browser. No install needed.</p>
-      <div class="editor-wrap">
-        <div class="editor-bar">
+    <!-- Cloud Console teaser -->
+    <section class="container" id="console-teaser">
+      <h2 class="reveal">Cloud Console for management</h2>
+      <p class="lead reveal" data-delay="100">A single pane of glass for every API Board key: quota, usage trends, rotation, audit feed — all in real time.</p>
+      <div class="console-mockup reveal" data-delay="200">
+        <div class="console-bar">
           <span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span>
-          <span class="editor-title">hello.esharp</span>
+          <span class="console-title">apiboard.dev/console</span>
         </div>
-        <textarea id="esharp-editor" spellcheck="false">// hello.esharp — combine two API Board scenes
-use api_board::{Movie, Weather};
-
-game! MovieNight {
-    title: "Movie night in Berlin",
-    scenes: [
-        Scene::from(Movie::search("inception")),
-        Scene::from(Weather::current("Berlin")),
-    ],
-}
-
-fn main() -&gt; Game {
-    let mut game = MovieNight::new();
-    game.play()
-}</textarea>
-      </div>
-      <p class="hint">Tip: Press Ctrl+S to "compile" (just a syntax check stub for now).</p>
-    </section>
-
-    <section class="container" id="comments">
-      <h2>Community comments</h2>
-      <p class="lead">Sign in with GitHub to post comments, upload images, and vote on feature requests.</p>
-      <div class="comment-composer">
-        <p class="muted">Sign in via the Next.js app at <a href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">github.com/gefrus112/API-board</a> to post comments with your GitHub avatar.</p>
-      </div>
-      <div class="comments-list" id="comments-list">
-        <div class="comment">
-          <div class="avatar">G</div>
-          <div class="body">
-            <p class="meta"><strong>@gefrus112</strong> · 2 days ago</p>
-            <p>Welcome to API Board! Share your feedback, feature requests, or screenshots of how you're using the board.</p>
-            <div class="votes">▲ 12</div>
+        <div class="console-grid">
+          <div class="console-side">
+            <div class="side-item active">Overview</div>
+            <div class="side-item">API Keys</div>
+            <div class="side-item">Usage</div>
+            <div class="side-item">Activity</div>
+            <div class="side-item">Webhooks</div>
+            <div class="side-item">Settings</div>
+          </div>
+          <div class="console-main">
+            <div class="metric-row">
+              <div class="metric"><span class="metric-label">Calls today</span><span class="metric-value">1,591</span><span class="metric-trend up">+12%</span></div>
+              <div class="metric"><span class="metric-label">Calls this month</span><span class="metric-value">34,521</span><span class="metric-trend up">+8%</span></div>
+              <div class="metric"><span class="metric-label">Active keys</span><span class="metric-value">6 / 6</span><span class="metric-trend flat">1 rotating</span></div>
+              <div class="metric"><span class="metric-label">Quota used</span><span class="metric-value">26%</span><span class="metric-trend up">6,000/day total</span></div>
+            </div>
+            <div class="sparkline-wrap">
+              <svg class="sparkline" viewBox="0 0 400 80" preserveAspectRatio="none">
+                <defs><linearGradient id="sparkG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--brand)" stop-opacity="0.4"/><stop offset="100%" stop-color="var(--brand)" stop-opacity="0"/></linearGradient></defs>
+                <polygon fill="url(#sparkG)" points="0,80 20,60 40,55 60,40 80,45 100,30 120,25 140,35 160,20 180,15 200,28 220,22 240,18 260,25 280,15 300,10 320,20 340,18 360,15 380,10 400,5 400,80"/>
+                <polyline fill="none" stroke="var(--brand)" stroke-width="2" points="20,60 40,55 60,40 80,45 100,30 120,25 140,35 160,20 180,15 200,28 220,22 240,18 260,25 280,15 300,10 320,20 340,18 360,15 380,10 400,5"/>
+              </svg>
+              <p class="sparkline-label">Calls · last 14 days</p>
+            </div>
           </div>
         </div>
       </div>
+      <p class="reveal" data-delay="300"><a class="btn btn-primary" href="./cloud-console.html">Open Cloud Console <svg class="icon"><use href="#i-arrow"/></svg></a></p>
     </section>
 
+    <!-- Game launcher teaser -->
+    <section class="container" id="games-teaser">
+      <h2 class="reveal">Game Launcher Detector</h2>
+      <p class="lead reveal" data-delay="100">A single batch file that detects every game on your machine — Steam library, Roblox player, Minecraft install, Epic Games launcher — and shows you how to combine them into an e# game.</p>
+      <div class="grid launcher-grid reveal" data-delay="200">
+        <div class="launcher-card"><svg class="icon"><use href="#i-gamepad"/></svg><h3>Steam</h3><p>Reads steamapps/libraryfolders.vdf and lists every installed game.</p></div>
+        <div class="launcher-card"><svg class="icon"><use href="#i-gamepad"/></svg><h3>Roblox</h3><p>Detects RobloxPlayerBeta.exe in %LOCALAPPDATA% and reports the version.</p></div>
+        <div class="launcher-card"><svg class="icon"><use href="#i-gamepad"/></svg><h3>Minecraft</h3><p>Finds .minecraft/launcher_profiles.json and counts the profiles.</p></div>
+        <div class="launcher-card"><svg class="icon"><use href="#i-gamepad"/></svg><h3>Epic Games</h3><p>Reads Epic's LauncherData.dat and lists the installed titles.</p></div>
+      </div>
+      <p class="reveal" data-delay="300"><a class="btn btn-primary" href="./games.html">Open Game Launcher <svg class="icon"><use href="#i-arrow"/></svg></a></p>
+    </section>
+
+    <!-- Downloads -->
     <section class="container" id="downloads">
-      <h2>Downloads</h2>
-      <p class="lead">Windows batch files, esharp samples, and the static HTML5 version of this page.</p>
+      <h2 class="reveal">Downloads</h2>
+      <p class="lead reveal" data-delay="100">Windows batch files, esharp samples, and the static HTML5 version of this page.</p>
       <div class="grid" id="download-grid"></div>
     </section>
   </main>
 
   <footer>
     <div class="container">
-      <span>© 2026 API Board · Restricted Access License v1.3</span>
+      <div class="footer-left">
+        <svg class="cube-logo-sm"><use href="#i-cube"/></svg>
+        <span>API Board · <span class="muted">Restricted Access License v1.4</span></span>
+      </div>
       <a href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">gefrus112/API-board</a>
     </div>
   </footer>

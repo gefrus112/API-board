@@ -40,50 +40,13 @@ interface Comment {
 }
 
 const TOPICS: { id: Comment["topic"]; label: string; emoji: string }[] = [
-  { id: "website", label: "Website", emoji: "🌐" },
-  { id: "code", label: "Code", emoji: "💻" },
-  { id: "esharp", label: "e# language", emoji: "🎮" },
-  { id: "other", label: "Other", emoji: "💬" },
+  { id: "website", label: "Website", emoji: "" },
+  { id: "code", label: "Code", emoji: "" },
+  { id: "esharp", label: "e# language", emoji: "" },
+  { id: "other", label: "Other", emoji: "" },
 ];
 
-const SEED_COMMENTS: Comment[] = [
-  {
-    id: "c1",
-    authorLogin: "gefrus112",
-    authorName: "API Board maintainer",
-    authorAvatar: "https://avatars.githubusercontent.com/u/0?v=4",
-    body: "Welcome to API Board! Share how you're using the dashboard, post screenshots of your e# programs, or vote on what should ship next.",
-    images: [],
-    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2,
-    upvotes: 12,
-    upvotedBy: [],
-    topic: "website",
-  },
-  {
-    id: "c2",
-    authorLogin: "ada",
-    authorName: "Ada",
-    authorAvatar: "https://avatars.githubusercontent.com/u/1?v=4",
-    body: "The e# Steam mashup sample is wild — I combined Portal 2 + Stardew Valley into one split-screen and it actually runs at 60 fps. Can we get a tutorial on stitching maps together?",
-    images: [],
-    createdAt: Date.now() - 1000 * 60 * 60 * 20,
-    upvotes: 8,
-    upvotedBy: [],
-    topic: "esharp",
-  },
-  {
-    id: "c3",
-    authorLogin: "lin",
-    authorName: "Lin",
-    authorAvatar: "https://avatars.githubusercontent.com/u/2?v=4",
-    body: "Please add a Rust crate that bundles all 13 APIs behind one Cargo dependency. The current SDK is great for JS/TS but I want one for Rust too.",
-    images: [],
-    createdAt: Date.now() - 1000 * 60 * 60 * 5,
-    upvotes: 5,
-    upvotedBy: [],
-    topic: "code",
-  },
-];
+const SEED_COMMENTS: Comment[] = [];
 
 export function CommentsSection() {
   const { user, hydrated } = useGitHubAuth();

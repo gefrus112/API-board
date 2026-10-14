@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-ab-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comments — API Board</title>
+  <meta name="description" content="Sign in with GitHub to post comments about the website, code, and e# language. Upload images, upvote, and sort by Top or Newest." />
+  <link rel="icon" type="image/svg+xml" href="./cube.svg" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <defs>
+      <linearGradient id="cubeFront" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#1d4ed8"/></linearGradient>
+      <linearGradient id="cubeTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient>
+      <linearGradient id="cubeSide" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#1e3a8a"/></linearGradient>
+    </defs>
+    <symbol id="i-cube" viewBox="0 0 64 64">
+      <path d="M32 4 L58 18 L32 32 L6 18 Z" fill="url(#cubeTop)"/>
+      <path d="M6 18 L32 32 L32 60 L6 46 Z" fill="url(#cubeSide)"/>
+      <path d="M58 18 L32 32 L32 60 L58 46 Z" fill="url(#cubeFront)"/>
+      <circle cx="40" cy="36" r="2.4" fill="#fff"/>
+      <circle cx="50" cy="36" r="2.4" fill="#fff"/>
+      <path d="M38 44 Q45 50 52 44" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+    </symbol>
+    <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A12 12 0 0 0 0 12a12 12 0 0 0 8.21 11.39c.6.11.82-.26.82-.58v-2.17c-3.34.72-4.04-1.42-4.04-1.42-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0 1 12 6.8c1.02 0 2.05.14 3 .41 2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12 12 12 0 0 0 12 .5z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="i-comments" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  </svg>
+
+  <header>
+    <div class="container nav-row">
+      <a class="logo" href="./index.html">
+        <svg class="cube-logo"><use href="#i-cube"/></svg>
+        <span>API Board <span class="ver">v1.4</span></span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./esharp.html">e#</a></li>
+          <li><a href="./cloud-console.html">Cloud Console</a></li>
+          <li><a href="./games.html">Game Launcher</a></li>
+          <li><a href="./comments.html" class="active">Comments</a></li>
+          <li><a href="./docs.html">Docs</a></li>
+        </ul>
+      </nav>
+      <div class="actions">
+        <a class="btn btn-ghost" href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">
+          <svg class="icon"><use href="#i-github"/></svg> GitHub
+        </a>
+        <button class="btn" id="theme-toggle" type="button" aria-label="Toggle theme">
+          <svg class="icon icon-sun"><use href="#i-sun"/></svg>
+          <svg class="icon icon-moon"><use href="#i-moon"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <h1 class="reveal"><svg class="icon" style="width:32px;height:32px;color:var(--brand);vertical-align:middle"><use href="#i-comments"/></svg> Community comments</h1>
+        <p class="reveal" data-delay="100">Sign in with GitHub in the full Next.js app to post comments, upload screenshots, and vote on what should ship next. No bot comments — every comment is from a real GitHub user.</p>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="prose">
+        <h2 class="reveal">How to comment</h2>
+        <p class="reveal" data-delay="100">The full comments experience lives in the Next.js app at <code>apiboard.dev/comments</code>. This static page documents the feature.</p>
+        <ol class="reveal" data-delay="200" style="margin:0 0 24px 24px">
+          <li>Click <strong>Sign in</strong> in the header.</li>
+          <li>Paste a GitHub Personal Access Token with the <code>read:user</code> scope (generate one at <a href="https://github.com/settings/tokens" target="_blank" rel="noreferrer">github.com/settings/tokens</a>).</li>
+          <li>The app fetches your public profile via <code>api.github.com/user</code> and shows your avatar + username.</li>
+          <li>Head to the <strong>Comments</strong> tab, pick a topic (Website / Code / e# language / Other), type your message, optionally attach an image, and click <strong>Post</strong>.</li>
+          <li>Upvote comments you find useful (toggle by clicking again). Delete your own comments any time.</li>
+        </ol>
+        <p class="reveal" data-delay="300">All comments are stored in your browser's <code>localStorage</code> — there is no backend. Seeded sample comments are NOT included in v1.4, so the comments list starts empty — yours can be the first.</p>
+
+        <h2 class="reveal" style="margin-top:48px">Topics</h2>
+        <ul class="reveal" data-delay="100">
+          <li><strong>Website</strong> — feedback on the design, the UX, what should change.</li>
+          <li><strong>Code</strong> — bug reports, refactor suggestions, missing APIs.</li>
+          <li><strong>e# language</strong> — feature requests, sample programs, integrations.</li>
+          <li><strong>Other</strong> — anything else.</li>
+        </ul>
+
+        <h2 class="reveal" style="margin-top:48px">Image uploads</h2>
+        <p class="reveal" data-delay="100">Attach up to <strong>1.5 MB per image</strong> (PNG / JPG / GIF / WebP). Images are converted to base64 data URLs and stored inline with the comment in <code>localStorage</code>. Remove an attachment by clicking the × on its thumbnail.</p>
+
+        <h2 class="reveal" style="margin-top:48px">Voting</h2>
+        <p class="reveal" data-delay="100">Click the upvote button (▲ + count) on any comment to upvote it. Click again to remove your upvote — the count updates instantly. Sort by <strong>Top</strong> (most upvotes) or <strong>Newest</strong> via the tabs above the list.</p>
+
+        <h2 class="reveal" style="margin-top:48px">Deleting</h2>
+        <p class="reveal" data-delay="100">You can delete your own comments only. A <strong>Delete</strong> button appears on comments authored by the GitHub account you signed in with.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-left">
+        <svg class="cube-logo-sm"><use href="#i-cube"/></svg>
+        <span>API Board · <span class="muted">Restricted Access License v1.4</span></span>
+      </div>
+      <a href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">gefrus112/API-board</a>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>

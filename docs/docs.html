@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-ab-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docs — API Board</title>
+  <meta name="description" content="Documentation hub: getting started, authentication, e# language, Cloud Console, batch files, IDE guides, deployment." />
+  <link rel="icon" type="image/svg+xml" href="./cube.svg" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <defs>
+      <linearGradient id="cubeFront" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#1d4ed8"/></linearGradient>
+      <linearGradient id="cubeTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient>
+      <linearGradient id="cubeSide" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#1e3a8a"/></linearGradient>
+    </defs>
+    <symbol id="i-cube" viewBox="0 0 64 64">
+      <path d="M32 4 L58 18 L32 32 L6 18 Z" fill="url(#cubeTop)"/>
+      <path d="M6 18 L32 32 L32 60 L6 46 Z" fill="url(#cubeSide)"/>
+      <path d="M58 18 L32 32 L32 60 L58 46 Z" fill="url(#cubeFront)"/>
+      <circle cx="40" cy="36" r="2.4" fill="#fff"/>
+      <circle cx="50" cy="36" r="2.4" fill="#fff"/>
+      <path d="M38 44 Q45 50 52 44" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+    </symbol>
+    <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A12 12 0 0 0 0 12a12 12 0 0 0 8.21 11.39c.6.11.82-.26.82-.58v-2.17c-3.34.72-4.04-1.42-4.04-1.42-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0 1 12 6.8c1.02 0 2.05.14 3 .41 2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12 12 12 0 0 0 12 .5z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="i-docs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  </svg>
+
+  <header>
+    <div class="container nav-row">
+      <a class="logo" href="./index.html">
+        <svg class="cube-logo"><use href="#i-cube"/></svg>
+        <span>API Board <span class="ver">v1.4</span></span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./esharp.html">e#</a></li>
+          <li><a href="./cloud-console.html">Cloud Console</a></li>
+          <li><a href="./games.html">Game Launcher</a></li>
+          <li><a href="./comments.html">Comments</a></li>
+          <li><a href="./docs.html" class="active">Docs</a></li>
+        </ul>
+      </nav>
+      <div class="actions">
+        <a class="btn btn-ghost" href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">
+          <svg class="icon"><use href="#i-github"/></svg> GitHub
+        </a>
+        <button class="btn" id="theme-toggle" type="button" aria-label="Toggle theme">
+          <svg class="icon icon-sun"><use href="#i-sun"/></svg>
+          <svg class="icon icon-moon"><use href="#i-moon"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <h1 class="reveal"><svg class="icon" style="width:32px;height:32px;color:var(--brand);vertical-align:middle"><use href="#i-docs"/></svg> Documentation</h1>
+        <p class="reveal" data-delay="100">Everything you need to get started: API keys, e# language, Cloud Console, batch files, IDE guides, and deployment.</p>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="grid" style="grid-template-columns:repeat(auto-fill, minmax(260px, 1fr))">
+        <a class="card reveal" data-delay="0" href="./esharp.html">
+          <svg class="icon"><use href="#i-docs"/></svg>
+          <h3>The e# language guide</h3>
+          <p>Rust-inspired syntax. Combines Steam, Roblox, Minecraft, Epic games together. Sample programs and install steps.</p>
+        </a>
+        <a class="card reveal" data-delay="50" href="./cloud-console.html">
+          <svg class="icon"><use href="#i-docs"/></svg>
+          <h3>Cloud Console</h3>
+          <p>Dashboard for every API Board key. Quota, usage trends, rotation, audit feed, webhooks.</p>
+        </a>
+        <a class="card reveal" data-delay="100" href="./games.html">
+          <svg class="icon"><use href="#i-docs"/></svg>
+          <h3>Game Launcher Detector</h3>
+          <p>Batch file that detects Steam, Roblox, Minecraft, Epic games on your machine.</p>
+        </a>
+        <a class="card reveal" data-delay="150" href="./comments.html">
+          <svg class="icon"><use href="#i-docs"/></svg>
+          <h3>How to use comments</h3>
+          <p>Sign in with GitHub to post comments, upload images, upvote, and sort by Top/Newest.</p>
+        </a>
+        <a class="card reveal" data-delay="200" href="https://github.com/gefrus112/API-board#readme" target="_blank" rel="noreferrer">
+          <svg class="icon"><use href="#i-docs"/></svg>
+          <h3>README on GitHub</h3>
+          <p>Full project overview, install commands, tech stack, tabs list, license summary.</p>
+        </a>
+        <a class="card reveal" data-delay="250" href="https://github.com/gefrus112/API-board/blob/main/LICENSE" target="_blank" rel="noreferrer">
+          <svg class="icon"><use href="#i-docs"/></svg>
+          <h3>License (restricted)</h3>
+          <p>API Board Restricted Access License v1.4. Personal evaluation only; derivative works require permission.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="container section" style="background:var(--bg-soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+      <div class="prose">
+        <h2 class="reveal">Quickstart</h2>
+        <pre class="reveal" data-delay="100"><code><span style="color:#94a3b8"># 1. Clone the repo</span>
+git clone https://github.com/gefrus112/API-board.git
+cd API-board
+
+<span style="color:#94a3b8"># 2. Install dependencies</span>
+npm install
+
+<span style="color:#94a3b8"># 3. Start the dev server</span>
+npm run dev
+
+<span style="color:#94a3b8"># 4. Open the app</span>
+<span style="color:#7dd3fc">open</span> http://localhost:3000</code></pre>
+
+        <h2 class="reveal" style="margin-top:48px">Windows installers</h2>
+        <p class="reveal" data-delay="100">Run as administrator (where indicated):</p>
+        <pre class="reveal" data-delay="200"><code><span style="color:#94a3b8"># Install the API Board Connect extension into VS 2022</span>
+install-apiboard-vs.bat   <span style="color:#94a3b8"># admin</span>
+
+<span style="color:#94a3b8"># Install the e# language toolchain</span>
+install-esharp.bat        <span style="color:#94a3b8"># admin</span>
+
+<span style="color:#94a3b8"># Drop style.css into any project root</span>
+connect-style-sheets.bat  <span style="color:#94a3b8"># no admin</span>
+
+<span style="color:#94a3b8"># Detect installed Steam, Roblox, Minecraft, Epic games</span>
+game-launcher-detector.bat  <span style="color:#94a3b8"># no admin</span></code></pre>
+
+        <h2 class="reveal" style="margin-top:48px">Make your first API call</h2>
+        <pre class="reveal" data-delay="100"><code>curl -X GET \\
+  'https://api.apiboard.dev/v1/weather/forecast?city=Berlin&amp;units=metric' \\
+  -H 'Authorization: Bearer ab_live_weather_4e2f9a8c1d6b3f7e'
+
+<span style="color:#94a3b8"># Response (200):</span>
+{
+  "location": { "name": "Berlin", "country": "DE" },
+  "current": { "temp_c": 14.2, "condition": "Partly cloudy" },
+  "forecast": [{ "date": "2026-10-15", "high_c": 16, "low_c": 8 }]
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-left">
+        <svg class="cube-logo-sm"><use href="#i-cube"/></svg>
+        <span>API Board · <span class="muted">Restricted Access License v1.4</span></span>
+      </div>
+      <a href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">gefrus112/API-board</a>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>

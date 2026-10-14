@@ -1,41 +1,46 @@
 # API Board
 
-> One board for every API key you need. **v1.3** — GitHub Pages live, in-browser e# code editor, Steam game combiner, community comments with image uploads + upvoting.
-
-API Board is an open-source single-page web app that bundles **13 free APIs** behind one dashboard, with copy-paste code sheets, Vercel-style documentation, a Windows installer for Visual Studio, **e# (esharp)** — a Rust-inspired programming language for combining Steam games together — and a built-in code editor.
+> One board for every API key you need. **v1.4** — GitHub Pages upgraded with no emojis, real SVG icons, multi-page nav, scroll-reveal animations, Cloud Console preview, Game Launcher Detector batch file, and 4 new docs pages.
 
 ![API Board](public/cube.svg)
 
-## v1.3 highlights
+## v1.4 highlights
 
-- **GitHub Pages live** — The static HTML5 version of the site is now published at **<https://gefrus112.github.io/API-board/>** via the `/docs` folder. Visit the URL to see the full website (not just the README).
-- **In-browser e# code editor** — Custom textarea with line numbers, syntax-highlighted overlay (use / game! / fn / let / Scene / strings / comments), a Run button that simulates the build + run output, and three switchable sample programs (hello / steam-mashup / weather-game).
-- **Combine Steam games together** — New `SteamMashup` sample program shows how `Steam::library().pick("Portal 2")` returns a renderable scene, and the `+` operator composes multiple games into one playable experience.
-- **VS Code walkthrough with stylized screenshots** — 4 annotated mockup screenshots of VS Code showing: new project, open hello.esharp, paste the Steam mashup, press F5 to run.
-- **Comments tab** — Sign in with GitHub to post comments about the website, code, e# language, or other features. Upload images (up to 1.5 MB each), upvote comments (toggleable), delete your own comments, sort by Top or Newest. All persisted in localStorage.
-- **3 stat cards** at the top of Comments — total comments, total upvotes, total topics.
+- **GitHub Pages upgraded** — `docs/index.html` rebuilt with no emojis, real inline SVG icons (cube mascot + 13 API icons), a glass nav, scroll-reveal animations, and a multi-page nav linking to esharp / cloud-console / games / comments / docs sub-pages.
+- **Multi-page site** — `docs/index.html`, `docs/esharp.html`, `docs/cloud-console.html`, `docs/games.html`, `docs/comments.html`, `docs/docs.html`. Each page has its own hero, prose, code samples, and download buttons.
+- **Game Launcher Detector** — New `public/downloads/game-launcher-detector.bat` (no admin needed) detects Steam (parses `libraryfolders.vdf` + `manifest_*.acf`), Roblox (`RobloxPlayerBeta.exe`), Minecraft (`launcher_profiles.json`), Epic Games (`Manifests/*.item`), writes `games.json`, and prints a copy-paste e# snippet.
+- **Comments: no bot comments** — Removed the 3 seeded sample comments (gefrus112 / ada / lin). The list starts empty — yours can be the first. Topic chips also had their emojis removed.
+- **4 new docs pages** in the Next.js app:
+  - **What is e# (esharp)?** — 60-second explainer + how to run your first program.
+  - **How to use the Comments tab** — sign-in flow, topics, image upload, upvote, delete.
+  - **Cloud Console — manage every key** — sidebar layout, Overview / API Keys / Usage / Activity / Webhooks sections.
+  - **Game Launcher Detector** — what the .bat detects + how to use the output in e#.
+- **Static site CSS upgraded** — Cool blue theme with three brand colors (blue + indigo + sky), aurora background blobs, cube-spin + cube-pulse-glow + aurora-drift + text-shimmer + glitch-shake + dot-pulse animations, glass header with `backdrop-filter: blur(12px) saturate(180%)`, hover lift on cards, gradient top bar on pillar hover, scanline sweep on download cards. Respects `prefers-reduced-motion`.
+- **Scroll reveal** — IntersectionObserver adds `.is-visible` to every `.reveal` element as it enters the viewport, with optional `data-delay` for staggered timing.
 
 ## GitHub Pages
 
-The static HTML5 version lives in the [`/docs`](docs/) folder. GitHub Pages serves it from `main` branch, `/docs` path.
+The static HTML5 site lives in the [`/docs`](docs/) folder and is published at **<https://gefrus112.github.io/API-board/>**.
 
-Live URL: **<https://gefrus112.github.io/API-board/>**
+| Page | URL |
+|---|---|
+| Home | https://gefrus112.github.io/API-board/ |
+| What is e# | https://gefrus112.github.io/API-board/esharp.html |
+| Cloud Console | https://gefrus112.github.io/API-board/cloud-console.html |
+| Game Launcher | https://gefrus112.github.io/API-board/games.html |
+| Comments | https://gefrus112.github.io/API-board/comments.html |
+| Docs hub | https://gefrus112.github.io/API-board/docs.html |
 
-## Features
+## Tabs in the Next.js app
 
-- **13 free APIs** — Movie Search, Weather, Rapid Tracking, IP Geolocation, Currency Exchange, Jokes, News Headlines, QR Generator, Sports Scores, Books, Recipes, Random User, Email & Signup
-- **Single dashboard** for managing API keys — create, rotate, pause, revoke, with editor + purpose columns
-- **GitHub profile card** in the dashboard when signed in
-- **Live activity feed** — see every call, rotation, and warning in real time
-- **Copy-paste code sheets** in CSS, JavaScript, TypeScript, C++, Python, and esharp
-- **Vercel-style docs** — searchable sidebar, multiple categories, tip/warn callouts
-- **Light / Dark / System theme toggle** — persisted to localStorage
-- **Custom blue cube mascot** with animated rotation + pulsing glow — also the favicon
-- **e# (esharp) programming language** — combine Steam games together, Rust-inspired syntax, VS project template, in-browser editor
-- **Windows batch installers** — run as administrator to install the API in Visual Studio, install e#, or connect style sheets to any project
-- **Static HTML5 version** for GitHub Pages — single self-contained site in `/docs`, no build needed
-- **Mobile responsive** — hamburger nav, single-column grids on phones
-- **Comments** — sign in to post, upload images, upvote, sort by Top/Newest
+1. **Home** — Hero ("Welcome to API Board"), pillars, 13-API feature grid, cURL preview, GitHub CTA
+2. **APIs** — All 13 APIs with endpoint, sample key, cURL example, JSON response
+3. **Management** — Dashboard with GitHub profile, stats, key list (reveal/copy/rotate/pause/revoke + sparkline + editor + purpose) + create-key modal
+4. **Downloads** — 7 downloadable items including the new `game-launcher-detector.bat`
+5. **e#** — esharp language page: mascot, Steam mashup sample, in-browser editor, VS Code walkthrough, 6 feature cards
+6. **Comments** — Sign in with GitHub to post + upload images + upvote (no bot comments)
+7. **Docs** — Vercel-style docs with sidebar (5 categories, 16 docs pages including 4 new)
+8. **Code Sheets** — File-tree viewer with 6 drop-in sheets
 
 ## Tech stack
 
@@ -43,10 +48,11 @@ Live URL: **<https://gefrus112.github.io/API-board/>**
 - **Language**: TypeScript 5
 - **Styling**: Tailwind CSS 4 + shadcn/ui (New York style)
 - **Animations**: Framer Motion + custom CSS keyframes
-- **Code highlighting**: react-syntax-highlighter (Prism — One Light / One Dark)
+- **Static site**: Plain HTML5 + CSS3 + vanilla JS (no build, GitHub Pages friendly)
+- **Code highlighting**: react-syntax-highlighter (Prism)
 - **Theme**: next-themes (Light / Dark / System)
-- **Icons**: lucide-react
-- **GitHub auth**: Direct browser-side calls to `api.github.com/user` with the user's PAT (read:user scope)
+- **Icons**: lucide-react (Next.js app) + inline SVG sprite (static site)
+- **GitHub auth**: PAT-based, calls `api.github.com/user` with `read:user` scope
 
 ## Getting started
 
@@ -59,29 +65,13 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Sign in with GitHub
-
-1. Click **Sign in** in the header.
-2. Paste your GitHub PAT (generate one at <https://github.com/settings/tokens> with the `read:user` scope).
-3. The app fetches your public profile via `api.github.com/user` and shows your avatar + username in the header.
-4. The token is stored in `localStorage` and only ever sent to `api.github.com`.
-
-## Tabs
-
-1. **Home** — Hero ("Welcome to API Board"), pillars (Fast / Secure / Composable), 13-API feature grid, cURL preview, GitHub CTA
-2. **APIs** — Searchable, filterable showcase of all 13 APIs with endpoint, sample key, cURL example, and JSON response
-3. **Management** — GitHub profile card + dashboard with stats + key list (reveal/copy/rotate/pause/revoke + sparkline + editor + purpose) + live activity feed + create-key modal
-4. **Downloads** — 6 downloadable items: 3 Windows batch files, 1 esharp sample, style.css, static HTML5 version
-5. **e#** — esharp language page: mascot icon, Steam game combiner sample, in-browser code editor, 4 VS Code walkthrough screenshots, 6 feature cards, install steps
-6. **Comments** — Sign in to post comments + upload images + upvote. Sort by Top or Newest. 3 stat cards. Topic chips (Website / Code / e# / Other).
-7. **Docs** — Vercel-style docs with sidebar grouped by 5 categories: Introduction, Production, API Guides, Tools, IDE Guides
-8. **Code Sheets** — File-tree viewer with 6 drop-in sheets
+For the static GitHub Pages site, just open `docs/index.html` in a browser, or visit <https://gefrus112.github.io/API-board/>.
 
 ## License
 
-**API Board Restricted Access License v1.3** — see [LICENSE](LICENSE).
+**API Board Restricted Access License v1.4** — see [LICENSE](LICENSE).
 
-Personal evaluation is allowed. Copying, forking, redistributing, or building derivative works requires written permission from the copyright holder.
+Personal evaluation is allowed. Copying, forking, redistributing, or building derivative works requires written permission.
 
 ## Acknowledgements
 

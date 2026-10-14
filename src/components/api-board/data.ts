@@ -1174,6 +1174,192 @@ esharp run`
       { type: "tip", text: "All three batch files print a log line per step. If something fails, copy the last 20 lines and open an issue on GitHub — the log includes your Windows version and VS edition so we can reproduce quickly." },
     ],
   },
+  {
+    id: "what-is-esharp",
+    title: "What is e# (esharp)?",
+    description:
+      "A 60-second explainer for the e# programming language: what it is, what it does, and how to run your first program.",
+    category: "Languages",
+    body: [
+      { type: "p", text: "e# (pronounced \"esharp\") is a domain-specific programming language built on top of API Board. It is designed for one job: combining your locally-installed games — Steam library, Roblox player, Minecraft profiles, Epic Games titles — into a single playable experience." },
+      { type: "p", text: "The syntax is inspired by Rust: ownership, borrowing, pattern matching, and zero-cost abstractions. e# adds a first-class game! macro and a Scene trait that turns any API Board response (or any installed game) into a renderable scene you can compose with the + operator." },
+      { type: "h", text: "Why does it exist?" },
+      { type: "p", text: "Modern games are not built from scratch — they are compositions of pre-existing systems (physics, rendering, audio, networking, AI). e# treats composition as the language's primary feature. Every game! block is a list of Scene values drawn from any source, including API Board responses and your locally-installed Steam library." },
+      { type: "h", text: "What does it do?" },
+      { type: "p", text: "Three things, end to end:" },
+      { type: "ul", items: [
+        "It reads your installed games (via the game-launcher-detector.bat file or the Steam::library() adapter at runtime).",
+        "It compiles .esharp source files into a single .game bundle (WASM for the browser, native binaries for Windows / macOS / Linux).",
+        "It runs the bundle in a 60 fps runtime that renders every Scene in the order you composed them, with overlays, side-by-side, or stitched maps.",
+      ]},
+      { type: "h", text: "How to run your first program" },
+      { type: "p", text: "After installing e# (run install-esharp.bat as administrator), open a command prompt and:" },
+      {
+        type: "code",
+        lang: "bash",
+        code: `# 1. Scaffold a new project
+esharp new my-mashup
+cd my-mashup
+
+# 2. Build the .esharp file into a .game bundle
+esharp build main.esharp
+
+# 3. Run the bundle
+esharp run main.game
+
+# Or do build + run in one step:
+esharp run main.esharp`
+      },
+      { type: "tip", text: "Prefer the IDE? Open Visual Studio 2022 → File → New → Project → e# Game. You get IntelliSense, syntax highlighting, and a built-in playground. Press F5 to build + run." },
+      { type: "h", text: "Combining Steam games together" },
+      { type: "p", text: "The Steam::library() adapter wraps your installed Steam library as a stream of renderable scenes. Pick a game with .pick(title) and compose multiple games into one playable experience — overlays, side-by-side, or stitched maps." },
+      {
+        type: "code",
+        lang: "rust",
+        caption: "steam-mashup.esharp",
+        code: `use api_board::Steam;
+
+game! SteamMashup {
+    title: "Open-world crossover",
+    scenes: [
+        Scene::from(Steam::library().pick("Portal 2")),
+        Scene::from(Steam::library().pick("Stardew Valley")),
+        Scene::from(Steam::library().pick("Hollow Knight"))
+            .overlay(position: TopRight, alpha: 0.6),
+    ],
+}
+
+fn main() -> Game {
+    let mut game = SteamMashup::new();
+    game.play()
+}`
+      },
+      { type: "h", text: "Detecting your installed games" },
+      { type: "p", text: "Run game-launcher-detector.bat on Windows. It detects Steam games, Roblox, Minecraft, and Epic Games titles, prints a list to the terminal, and writes a games.json file you can pass to Steam::library()." },
+      { type: "warn", text: "The detector only reads files in user-writable locations (%LOCALAPPDATA%, %APPDATA%, the user's Steam directory). It does not modify anything and does not require admin rights." },
+    ],
+  },
+  {
+    id: "how-to-use-comments",
+    title: "How to use the Comments tab",
+    description:
+      "Sign in with GitHub, post comments, upload images, upvote, and sort by Top or Newest.",
+    category: "Introduction",
+    body: [
+      { type: "p", text: "The Comments tab is the community feedback channel for API Board. Sign in with your GitHub account, post comments about the website / code / e# language / other features, attach screenshots, and upvote comments you find useful. No bot comments — every comment is from a real GitHub user." },
+      { type: "h", text: "1. Sign in with GitHub" },
+      { type: "p", text: "Click Sign in in the header. Paste a GitHub Personal Access Token with the read:user scope (generate one at github.com/settings/tokens). The app fetches your public profile via api.github.com/user and shows your avatar + username in the header." },
+      { type: "tip", text: "The token is stored in your browser's localStorage and only ever sent to api.github.com. Treat your PAT like a password — set an expiration of 30-90 days and revoke it if it leaks." },
+      { type: "h", text: "2. Pick a topic" },
+      { type: "p", text: "The composer has four topic chips: Website, Code, e# language, and Other. Pick the one that fits your comment — topics make it easier to filter and find related feedback later." },
+      { type: "h", text: "3. Write your message" },
+      { type: "p", text: "The textarea is disabled until you sign in. Once signed in, type anything — bug reports, feature requests, praise, screenshots of your e# programs, links to your projects, questions about how the API works." },
+      { type: "h", text: "4. Attach images (optional)" },
+      { type: "p", text: "Click Add image to attach up to 1.5 MB per image (PNG / JPG / GIF / WebP). Images are converted to base64 data URLs and stored inline with the comment in localStorage. Remove an attachment by clicking the × on its thumbnail." },
+      { type: "warn", text: "Because comments are stored in localStorage (not a backend), large images can fill your storage quota quickly. Keep images under 1 MB each where possible." },
+      { type: "h", text: "5. Post and upvote" },
+      { type: "p", text: "Click Post to publish. Your comment appears at the top of the Newest list and at the bottom of the Top list. Upvote (toggle by clicking again) on any comment you find useful — the count updates instantly. Sort by Top to see the most-upvoted comments, or Newest to see them in reverse-chronological order." },
+      { type: "h", text: "6. Delete your own comments" },
+      { type: "p", text: "A Delete button appears on comments authored by the GitHub account you signed in with. Click it to remove your comment — it disappears from everyone's view (since this is localStorage-only, it only disappears from your view, but the seeded data is local to each browser anyway)." },
+      { type: "tip", text: "Want a feature shipped? Post a comment with the topic set to Code or e# language. The maintainer reads every comment and prioritizes the most-upvoted ones." },
+    ],
+  },
+  {
+    id: "cloud-console-guide",
+    title: "Cloud Console — manage every key",
+    description:
+      "Dashboard for every API Board key in your account. Quota, usage trends, rotation, audit feed, webhooks.",
+    category: "Production",
+    body: [
+      { type: "p", text: "The Cloud Console is the unified dashboard for every API Board key in your account. From one screen you can see quota, usage trends, key rotation, the live activity feed, webhook configuration, and billing. The console lives at apiboard.dev/console (in the Next.js app) — this page documents the layout." },
+      { type: "h", text: "Sidebar" },
+      { type: "p", text: "The left sidebar has six sections: Overview, API Keys, Usage, Activity, Webhooks, Settings. Click any section to switch the main pane. The sidebar is collapsible on mobile." },
+      { type: "h", text: "Overview" },
+      { type: "p", text: "The Overview shows four stat cards at the top: Calls today, Calls this month, Active keys, Quota used. Below the stats, a 14-day sparkline plots your daily call count. The sparkline uses the same color as your brand — green for active, amber when you hit 70% quota, red at 90%." },
+      { type: "h", text: "API Keys" },
+      { type: "p", text: "The API Keys section lists every key in your account. Each row shows the service, environment, status, editor, purpose, masked key (reveal on click), last-used timestamp, today's quota bar (color-coded), a 14-day sparkline, and four action buttons: Copy, Rotate, Pause/Resume, Revoke." },
+      { type: "h", text: "Create a key" },
+      { type: "p", text: "Click the New key button in the top-right. The create-key modal opens with six fields: Service (pick from the catalog), Environment (production / staging / sandbox), Editor (Visual Studio 2022 / VS Code / Cursor / WebStorm / Rider / Neovim / Other), Purpose (free-form text), Key prefix (ab_live_ / ab_test_ / ab_demo_ / ab_trial_), and optional Key name. Click Generate key to create the key — it appears at the top of the list." },
+      { type: "h", text: "Usage" },
+      { type: "p", text: "The Usage section is a per-API breakdown: one row per service, with the daily / monthly / total call counts, the % of quota used, and a 30-day trend chart. Filter by environment (production / staging / sandbox) at the top." },
+      { type: "h", text: "Activity" },
+      { type: "p", text: "The Activity feed is real-time. Every API call, key rotation, quota warning, and webhook delivery shows up within 30 seconds of happening. Each event has a timestamp, service, status code, and latency. Click any event to see the full request + response payload." },
+      { type: "h", text: "Webhooks" },
+      { type: "p", text: "Subscribe to status changes with the Webhooks section: provide a callback URL, sign with HMAC-SHA256, and API Board will POST every event to your endpoint within 30 seconds of the carrier reporting it. If your endpoint returns a non-2xx status, the console retries with exponential backoff for up to 24 hours." },
+      { type: "warn", text: "Always verify the X-Board-Signature header on your webhook endpoint before trusting the payload. The signature is HMAC-SHA256(your webhook secret, raw body). Reject anything that fails verification." },
+    ],
+  },
+  {
+    id: "game-launcher-detector-guide",
+    title: "Game Launcher Detector",
+    description:
+      "Detect Steam, Roblox, Minecraft, and Epic Games installed on your machine — and write games.json for e#.",
+    category: "Tools",
+    body: [
+      { type: "p", text: "The game-launcher-detector.bat file is a Windows batch script that scans your machine for installed games across four launchers: Steam, Roblox, Minecraft, and Epic Games. It writes a games.json manifest you can pass to the e# Steam::library() adapter to compose your games into one playable experience." },
+      { type: "h", text: "What it detects" },
+      { type: "ul", items: [
+        "Steam — reads steamapps/libraryfolders.vdf and parses every steamapps/manifest_*.acf file. Output: appid + name + install path for every Steam game.",
+        "Roblox — detects RobloxPlayerBeta.exe in %LOCALAPPDATA%\\Roblox\\Versions\\version-*. Output: version number.",
+        "Minecraft — reads .minecraft/launcher_profiles.json and counts the profiles. Output: profile count.",
+        "Epic Games — reads ProgramData\\Epic\\EpicGamesLauncher\\Data\\Manifests\\*.item. Output: installed Epic titles.",
+      ]},
+      { type: "h", text: "How to run it" },
+      { type: "p", text: "Double-click game-launcher-detector.bat. It does not require administrator elevation. The script runs in four phases and prints a log line per step. When it finishes, it writes games.json in the same folder as the .bat file." },
+      {
+        type: "code",
+        lang: "powershell",
+        caption: "Sample output (truncated)",
+        code: `API Board — Game Launcher Detector v1.4
+========================================
+
+[1/4] Detecting Steam games...
+  → C:\\Program Files (x86)\\Steam\\steamapps
+    - Portal 2                (appid 620)
+    - Stardew Valley          (appid 413150)
+    - Hollow Knight           (appid 367520)
+  Found 3 Steam games.
+
+[2/4] Detecting Roblox...
+  Roblox installed: version 2.654.321
+
+[3/4] Detecting Minecraft...
+  Found 2 Minecraft profiles: "gefrus112", "creative"
+
+[4/4] Detecting Epic Games...
+  - Fortnite                (Namespace: fn)
+  - Fall Guys               (Namespace: fg)
+
+========================================
+Writing games.json... done.
+
+Total games detected: 7 (3 Steam · 1 Roblox · 2 Minecraft · 2 Epic)`
+      },
+      { type: "h", text: "Use the output in e#" },
+      { type: "p", text: "Open the generated games.json — it is a JSON array of game objects. Pick any title in your e# program with Steam::library().pick(title):" },
+      {
+        type: "code",
+        lang: "rust",
+        code: `use api_board::Steam;
+
+game! Mashup {
+    scenes: [
+        Scene::from(Steam::library().pick("Portal 2")),
+        Scene::from(Steam::library().pick("Stardew Valley")),
+        Scene::from(Steam::library().pick("Hollow Knight"))
+            .overlay(position: TopRight, alpha: 0.6),
+    ],
+}
+
+fn main() -> Game {
+    let mut game = Mashup::new();
+    game.play()
+}`
+      },
+      { type: "tip", text: "Run the detector any time you install or uninstall a game — it overwrites games.json with the current state of your library." },
+      { type: "warn", text: "The detector only reads files in user-writable locations. It does not modify any files and does not require admin rights. If your Steam library is on a different drive (e.g. D:\\SteamLibrary), the script still finds it via libraryfolders.vdf." },
+    ],
+  },
 ];
 
 export interface CodeSheet {
@@ -1616,6 +1802,27 @@ export const downloads: DownloadItem[] = [
     ],
     rawUrl:
       "https://raw.githubusercontent.com/gefrus112/API-board/main/public/downloads/connect-style-sheets.bat",
+  },
+  {
+    id: "dl-game-launcher-detector",
+    filename: "game-launcher-detector.bat",
+    publicPath: "/downloads/game-launcher-detector.bat",
+    size: "2.4 KB",
+    kind: "batch",
+    title: "Game Launcher Detector — Steam, Roblox, Minecraft, Epic",
+    description:
+      "Detects every game on your Windows machine and writes a games.json manifest you can pass to e#. Reads Steam manifests, the Roblox install path, Minecraft launcher profiles, and Epic Games manifests. No admin rights needed.",
+    adminRequired: false,
+    steps: [
+      "Phase 1 — Parses Steam steamapps/manifest_*.acf files and lists every installed game (appid + name).",
+      "Phase 2 — Detects RobloxPlayerBeta.exe in %LOCALAPPDATA%\\Roblox\\Versions\\version-* and reports the version.",
+      "Phase 3 — Reads .minecraft/launcher_profiles.json and counts Minecraft profiles.",
+      "Phase 4 — Reads Epic Games Manifests/*.item and lists the installed Epic titles.",
+      "Writes ./games.json with every detected game (platform, appid, name, path).",
+      "Prints a copy-paste e# snippet that picks your games with Steam::library().pick(title).",
+    ],
+    rawUrl:
+      "https://raw.githubusercontent.com/gefrus112/API-board/main/public/downloads/game-launcher-detector.bat",
   },
   {
     id: "dl-hello-esharp",
