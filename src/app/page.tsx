@@ -7,6 +7,7 @@ import { ApisSection } from "@/components/api-board/apis-section";
 import { ManagementSection } from "@/components/api-board/management-section";
 import { DownloadsSection } from "@/components/api-board/downloads-section";
 import { EsharpSection } from "@/components/api-board/esharp-section";
+import { CommentsSection } from "@/components/api-board/comments-section";
 import { DocsSection } from "@/components/api-board/docs-section";
 import { SheetsSection } from "@/components/api-board/sheets-section";
 import { Footer } from "@/components/api-board/footer";
@@ -25,6 +26,7 @@ export default function Page() {
           {tab === "management" && <ManagementSection />}
           {tab === "downloads" && <DownloadsSection />}
           {tab === "esharp" && <EsharpSection />}
+          {tab === "comments" && <CommentsSection />}
           {tab === "docs" && <DocsSection />}
           {tab === "sheets" && <SheetsSection />}
         </PageTransition>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-ab-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Board — Free API Keys, Docs & Code Sheets</title>
+  <meta name="description" content="13 free APIs behind one dashboard: movie search, weather, tracking, geolocation, currency, jokes, news, QR, sports, books, recipes, random user, email signup. Plus the e# language for combining Steam games together." />
+  <link rel="icon" type="image/svg+xml" href="./cube.svg" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header>
+    <div class="container nav-row">
+      <a class="logo" href="#">
+        <img src="./cube.svg" alt="API Board" />
+        <span>API Board <span class="ver">v1.3</span></span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#apis">APIs</a></li>
+          <li><a href="#management">Management</a></li>
+          <li><a href="#esharp">e#</a></li>
+          <li><a href="#editor">Editor</a></li>
+          <li><a href="#comments">Comments</a></li>
+          <li><a href="#downloads">Downloads</a></li>
+        </ul>
+      </nav>
+      <div class="actions">
+        <a class="btn btn-ghost" href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">GitHub</a>
+        <button class="btn" id="theme-toggle" type="button">Theme</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="badge">★ 13 free APIs · one dashboard · open source</div>
+        <img class="cube-hero" src="./cube.svg" alt="API Board cube" />
+        <p class="eyebrow">Welcome to API Board</p>
+        <h1>One board for every <span>API key</span> you need</h1>
+        <p>API Board bundles 13 free APIs behind a single dashboard — movie search, weather, tracking, geolocation, currency, jokes, news, QR, sports scores, books, recipes, random user, and email signup — plus the e# language for combining Steam games together.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#apis">Browse APIs</a>
+          <a class="btn" href="#esharp">Meet e#</a>
+          <a class="btn" href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">Star on GitHub</a>
+        </div>
+        <dl class="stats">
+          <div class="stat"><dt>Live APIs</dt><dd>13</dd></div>
+          <div class="stat"><dt>Free quota</dt><dd>1,000 / day</dd></div>
+          <div class="stat"><dt>Carriers tracked</dt><dd>200+</dd></div>
+          <div class="stat"><dt>FX currencies</dt><dd>170+</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="pillars">
+        <div class="pillar"><h3>⚡ Fast</h3><p>Edge-cached responses, sub-50ms TTFB on hot routes, automatic retry on 5xx errors.</p></div>
+        <div class="pillar"><h3>🛡 Secure</h3><p>Keys prefixed ab_live_ for prod and ab_test_ for sandbox. Rotate with 7-day grace period.</p></div>
+        <div class="pillar"><h3>🧩 Composable</h3><p>Every API ships with a TypeScript SDK, a cURL example, and a drop-in code sheet.</p></div>
+      </div>
+    </section>
+
+    <section class="container" id="apis">
+      <h2>What's on the board</h2>
+      <p class="lead">Each API ships with its own key, its own rate limit, and its own docs page. Use one or use them all.</p>
+      <div class="grid" id="api-grid"></div>
+    </section>
+
+    <section class="container" id="esharp">
+      <h2>Meet e# (esharp)</h2>
+      <p class="lead">A Rust-inspired programming language for combining Steam games together into a single playable experience.</p>
+      <div class="esharp-hero">
+        <img src="./esharp.svg" alt="e# mascot" />
+        <div>
+          <pre><code>use api_board::{Movie, Weather, Steam};
+
+game! SteamMashup {
+    title: "Cinematic weather in Berlin",
+    scenes: [
+        Scene::from(Movie::search("inception")),
+        Scene::from(Weather::current("Berlin")),
+        Scene::from(Steam::library().pick("Portal 2")),
+    ],
+}
+
+fn main() -&gt; Game {
+    let mut game = SteamMashup::new();
+    game.play()
+}</code></pre>
+        </div>
+      </div>
+      <p style="margin-top:24px;">
+        <a class="btn btn-primary" href="https://github.com/gefrus112/API-board/raw/main/public/downloads/install-esharp.bat">Download install-esharp.bat</a>
+        <a class="btn" href="https://github.com/gefrus112/API-board/raw/main/public/downloads/hello.esharp">Download hello.esharp</a>
+      </p>
+    </section>
+
+    <section class="container" id="editor">
+      <h2>Try the e# editor</h2>
+      <p class="lead">Write e# code right in your browser. No install needed.</p>
+      <div class="editor-wrap">
+        <div class="editor-bar">
+          <span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span>
+          <span class="editor-title">hello.esharp</span>
+        </div>
+        <textarea id="esharp-editor" spellcheck="false">// hello.esharp — combine two API Board scenes
+use api_board::{Movie, Weather};
+
+game! MovieNight {
+    title: "Movie night in Berlin",
+    scenes: [
+        Scene::from(Movie::search("inception")),
+        Scene::from(Weather::current("Berlin")),
+    ],
+}
+
+fn main() -&gt; Game {
+    let mut game = MovieNight::new();
+    game.play()
+}</textarea>
+      </div>
+      <p class="hint">Tip: Press Ctrl+S to "compile" (just a syntax check stub for now).</p>
+    </section>
+
+    <section class="container" id="comments">
+      <h2>Community comments</h2>
+      <p class="lead">Sign in with GitHub to post comments, upload images, and vote on feature requests.</p>
+      <div class="comment-composer">
+        <p class="muted">Sign in via the Next.js app at <a href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">github.com/gefrus112/API-board</a> to post comments with your GitHub avatar.</p>
+      </div>
+      <div class="comments-list" id="comments-list">
+        <div class="comment">
+          <div class="avatar">G</div>
+          <div class="body">
+            <p class="meta"><strong>@gefrus112</strong> · 2 days ago</p>
+            <p>Welcome to API Board! Share your feedback, feature requests, or screenshots of how you're using the board.</p>
+            <div class="votes">▲ 12</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="downloads">
+      <h2>Downloads</h2>
+      <p class="lead">Windows batch files, esharp samples, and the static HTML5 version of this page.</p>
+      <div class="grid" id="download-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>© 2026 API Board · Restricted Access License v1.3</span>
+      <a href="https://github.com/gefrus112/API-board" target="_blank" rel="noreferrer">gefrus112/API-board</a>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>

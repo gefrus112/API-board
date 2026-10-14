@@ -50,6 +50,7 @@ export function Footer({ onTabChange }: FooterProps) {
                 { id: "management" as TabId, label: "Management" },
                 { id: "downloads" as TabId, label: "Downloads" },
                 { id: "esharp" as TabId, label: "e#" },
+                { id: "comments" as TabId, label: "Comments" },
                 { id: "docs" as TabId, label: "Docs" },
                 { id: "sheets" as TabId, label: "Code Sheets" },
               ].map((item) => (

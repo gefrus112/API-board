@@ -17,7 +17,8 @@ export type TabId =
   | "docs"
   | "sheets"
   | "downloads"
-  | "esharp";
+  | "esharp"
+  | "comments";
 
 interface HeaderProps {
   active: TabId;
@@ -30,6 +31,7 @@ const NAV: { id: TabId; label: string }[] = [
   { id: "management", label: "Management" },
   { id: "downloads", label: "Downloads" },
   { id: "esharp", label: "e#" },
+  { id: "comments", label: "Comments" },
   { id: "docs", label: "Docs" },
   { id: "sheets", label: "Code Sheets" },
 ];
